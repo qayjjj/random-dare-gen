@@ -1,0 +1,17 @@
+.home-container {
+    width: 100vw;
+    display: relative;
+}
+img {
+    display: absolute;
+    top: 0;
+    right: 0;
+}
+.start-button {
+    width: 25%;
+    color: rgba(191,172,200, 0.7);
+}
+
+.name-input:focus {
+    outline-color: rgb(172,77,218);
+}
