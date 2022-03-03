@@ -1,23 +1,70 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
 import arrow from "./arrow.png";
 import triangle from "./Triangle.png";
+import whiteTriangle from "./Triangle-white.png";
 
 function Home() {
+  const [inputValid, setInputValid] = useState(false);
+
+  const handleOnChange = (e) => {
+    if (e.target.value) {
+      if (!inputValid) {
+        setInputValid(true);
+        document
+          .getElementById("start-button")
+          .classList.add("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
+        document
+          .getElementById("start-text")
+          .classList.add("drop-shadow-lg", "text-white");
+      }
+    } else {
+      if (inputValid) {
+        setInputValid(false);
+        document
+          .getElementById("start-button")
+          .classList.remove("drop-shadow-md", "bg-lime-400", "cursor-pointer");
+        document
+          .getElementById("start-text")
+          .classList.remove("drop-shadow-md", "text-white");
+      }
+    }
+  };
+
+  const handleOnClick = () => {
+    const input = document.getElementById("name-input").value;
+    const players = input.replaceAll(/\s/g, "").split(",");
+    console.log(players);
+  };
+
   return (
-    <div className="home-container w-screen flex flex-col items-center py-24">
+    <div className="home-container flex flex-col items-center mt-36">
       <div className="relative">
-        <h1 className="header text-4xl drop-shadow-md font-semibold">
+        <h1 className="header text-4xl drop-shadow-lg font-semibold">
           Who are the players?
         </h1>
         <img src={arrow} className="h-20 absolute -right-44 top-2.5" />
       </div>
 
-      <input className="name-input mt-12 w-5/12 h-12 rounded-full drop-shadow-lg text-black py-5 px-8 text-xl"></input>
+      <input
+        id="name-input"
+        placeholder="Enter player names"
+        className="name-input mt-12 w-5/12 h-12 rounded-full drop-shadow-lg text-black py-5 px-8 text-xl"
+        onChange={(e) => handleOnChange(e)}
+      ></input>
 
-      <div className="mt-12 bg-white h-20 px-12 rounded-full drop-shadow-lg start-button flex place-content-center items-center justify-between">
-        <span className="text-5xl font-extrabold tracking-widest">Start</span>
-        <img src={triangle} className="h-8" />
+      <div
+        id="start-button"
+        className="mt-12 bg-white h-20 px-12 rounded-full start-button flex place-content-center items-center justify-between"
+        onClick={handleOnClick}
+      >
+        <span
+          id="start-text"
+          className="text-5xl font-extrabold tracking-widest"
+        >
+          Start
+        </span>
+        <img src={inputValid ? whiteTriangle : triangle} className="h-8" />
       </div>
     </div>
   );
