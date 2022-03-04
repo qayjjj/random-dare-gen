@@ -1,0 +1,27 @@
+[
+    {
+        "text": "Chug a whole bottle of water",
+        "playerNum": 1,
+        "filter": "Family"
+    },
+    {
+        "text": "Sing a song together",
+        "playerNum": 2,
+        "filter": "Family"
+    },
+    {
+        "text": "Tell us about your first crush",
+        "playerNum": 1,
+        "filter": "Family"
+    },
+    {
+        "text": "Call your parent(s) and say you love them",
+        "playerNum": 1,
+        "filter": "Family"
+    },
+    {
+        "text": "Make a frog sound",
+        "playerNum": 1,
+        "filter": "Family"
+    }
+]
