@@ -1,18 +1,28 @@
-import React from "react";
-import Header from "./components/Header";
+import React, { memo } from "react";
+import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Dare from "./components/Dare/Dare";
 import Scores from "./components/Scores/Scores";
+import DareState from "./components/Dare/Dare.state.jsx";
 
-function App() {
+function AppView() {
+  const { startGame } = DareState.useContainer();
+
   return (
     <div className="py-8 px-8">
       <Header />
-      {/* <Scores /> */}
-      {/* <Home /> */}
-      <Dare />
+      {startGame ? <Dare /> : <Home />}
     </div>
   );
 }
 
-export default App;
+/**
+ * Container
+ */
+const App = () => (
+  <DareState.Provider>
+    <AppView />
+  </DareState.Provider>
+);
+
+export default memo(App);

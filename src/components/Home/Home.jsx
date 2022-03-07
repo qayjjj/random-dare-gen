@@ -1,10 +1,12 @@
-import React, { useRef, useState, useEffect } from "react";
-import "./styles.css";
+import React, { useState } from "react";
+import DareState from "../Dare/Dare.state.jsx";
 import arrow from "./arrow.png";
 import triangle from "./Triangle.png";
 import whiteTriangle from "./Triangle-white.png";
+import "./styles.css";
 
 function Home() {
+  const { setStartGame, players, setPlayers } = DareState.useContainer();
   const [inputValid, setInputValid] = useState(false);
 
   const handleOnChange = (e) => {
@@ -48,7 +50,7 @@ function Home() {
 
       <input
         id="name-input"
-        placeholder="Enter player names"
+        placeholder="Enter player names e.g. Jane, John, Jack"
         className="name-input mt-12 w-5/12 h-12 rounded-full drop-shadow-lg text-black py-5 px-8 text-xl"
         onChange={(e) => handleOnChange(e)}
       ></input>
@@ -56,7 +58,7 @@ function Home() {
       <div
         id="start-button"
         className="mt-12 bg-white h-20 px-12 rounded-full start-button flex place-content-center items-center justify-between"
-        onClick={handleOnClick}
+        onClick={inputValid ? () => setStartGame(true) : null}
       >
         <span
           id="start-text"
