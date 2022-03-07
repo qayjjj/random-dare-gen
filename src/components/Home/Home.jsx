@@ -6,7 +6,7 @@ import whiteTriangle from "./Triangle-white.png";
 import "./styles.css";
 
 function Home() {
-  const { setStartGame, players, setPlayers } = DareState.useContainer();
+  const { setStartGame, setPlayers } = DareState.useContainer();
   const [inputValid, setInputValid] = useState(false);
 
   const handleOnChange = (e) => {

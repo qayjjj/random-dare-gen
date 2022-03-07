@@ -6,7 +6,7 @@ function Header() {
 
   const handleClick = () => {
     setStartGame(false);
-    setPlayers(null);
+    setPlayers([]);
   };
 
   return (
