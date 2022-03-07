@@ -36,7 +36,8 @@ function Home() {
   const handleOnClick = () => {
     const input = document.getElementById("name-input").value;
     const players = input.replaceAll(/\s/g, "").split(",");
-    console.log(players);
+    setStartGame(true);
+    setPlayers(players);
   };
 
   return (
@@ -58,7 +59,7 @@ function Home() {
       <div
         id="start-button"
         className="mt-12 bg-white h-20 px-12 rounded-full start-button flex place-content-center items-center justify-between"
-        onClick={inputValid ? () => setStartGame(true) : null}
+        onClick={inputValid ? handleOnClick : null}
       >
         <span
           id="start-text"

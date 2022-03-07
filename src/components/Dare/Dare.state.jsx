@@ -3,7 +3,7 @@ import { createContainer } from "unstated-next";
 
 const useDareState = () => {
   const [startGame, setStartGame] = useState(false);
-  const [players, setPlayers] = useState(null);
+  const [players, setPlayers] = useState([]);
 
   return { startGame, setStartGame, players, setPlayers };
 };

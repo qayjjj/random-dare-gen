@@ -1,9 +1,12 @@
 import React from "react";
+import DareState from "./Dare.state.jsx";
 import "./styles.css";
 
 function Dare() {
+  const { players } = DareState.useContainer();
   const dares = require("./Dares.json");
   let dare = dares[Math.floor(Math.random() * dares.length)];
+
   return (
     <div className="w-screen flex flex-col items-center mt-32">
       <h1 className="text-5xl drop-shadow-lg font-semibold">Nam</h1>
