@@ -6,7 +6,7 @@ import whiteTriangle from "./Triangle-white.png";
 import "./styles.css";
 
 function Home() {
-  const { setStartGame, players, setPlayers } = DareState.useContainer();
+  const { setStartGame, setPlayers } = DareState.useContainer();
   const [inputValid, setInputValid] = useState(false);
 
   const handleOnChange = (e) => {
@@ -41,9 +41,9 @@ function Home() {
   };
 
   return (
-    <div className="home-container flex flex-col items-center mt-36">
+    <div className="home-container flex flex-col items-center mt-52">
       <div className="relative">
-        <h1 className="header text-4xl drop-shadow-lg font-semibold">
+        <h1 className="header text-5xl drop-shadow-lg font-semibold">
           Who are the players?
         </h1>
         <img src={arrow} className="h-20 absolute -right-44 top-2.5" />
@@ -52,7 +52,7 @@ function Home() {
       <input
         id="name-input"
         placeholder="Enter player names e.g. Jane, John, Jack"
-        className="name-input mt-12 w-5/12 h-12 rounded-full drop-shadow-lg text-black py-5 px-8 text-xl"
+        className="name-input mt-12 w-6/12 h-16 rounded-full drop-shadow-lg text-black py-5 px-8 text-xl"
         onChange={(e) => handleOnChange(e)}
       ></input>
 
