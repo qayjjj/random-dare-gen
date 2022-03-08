@@ -21,7 +21,7 @@ function Dare() {
   const acceptOnMouseEnter = () => {
     document
       .getElementById("accept-button")
-      .classList.add("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
+      .classList.add("drop-shadow-lg", "bg-[#a3e635]", "cursor-pointer");
     document
       .getElementById("accept-text")
       .classList.add("drop-shadow-lg", "text-white");
@@ -30,7 +30,7 @@ function Dare() {
   const acceptOnMouseLeave = () => {
     document
       .getElementById("accept-button")
-      .classList.remove("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
+      .classList.remove("drop-shadow-lg", "bg-[#a3e635]", "cursor-pointer");
     document
       .getElementById("accept-text")
       .classList.remove("drop-shadow-lg", "text-white");
@@ -75,7 +75,7 @@ function Dare() {
           id="accept-text"
           className="text-5xl font-extrabold tracking-widest"
         >
-          Accept
+          Next
         </span>
       </div>
     </div>
