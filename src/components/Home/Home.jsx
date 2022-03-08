@@ -15,7 +15,7 @@ function Home() {
         setInputValid(true);
         document
           .getElementById("start-button")
-          .classList.add("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
+          .classList.add("drop-shadow-lg", "bg-[#a3e635]", "cursor-pointer");
         document
           .getElementById("start-text")
           .classList.add("drop-shadow-lg", "text-white");
@@ -25,7 +25,7 @@ function Home() {
         setInputValid(false);
         document
           .getElementById("start-button")
-          .classList.remove("drop-shadow-md", "bg-lime-400", "cursor-pointer");
+          .classList.remove("drop-shadow-md", "bg-[#a3e635]", "cursor-pointer");
         document
           .getElementById("start-text")
           .classList.remove("drop-shadow-md", "text-white");
