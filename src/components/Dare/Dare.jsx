@@ -36,6 +36,24 @@ function Dare() {
       .classList.remove("drop-shadow-lg", "text-white");
   };
 
+  const declineOnMouseEnter = () => {
+    document
+      .getElementById("decline-button")
+      .classList.add("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
+    document
+      .getElementById("decline-text")
+      .classList.add("drop-shadow-lg", "text-white");
+  };
+
+  const declineOnMouseLeave = () => {
+    document
+      .getElementById("decline-button")
+      .classList.remove("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
+    document
+      .getElementById("decline-text")
+      .classList.remove("drop-shadow-lg", "text-white");
+  };
+
   return (
     <div className="flex flex-col items-center mt-44">
       <h1 className="text-5xl drop-shadow-lg font-semibold">{currentPlayer}</h1>
@@ -61,7 +79,12 @@ function Dare() {
         </span>
       </div>
     </div>
+    
+
+    
   );
+
+
 }
 
 export default Dare;
