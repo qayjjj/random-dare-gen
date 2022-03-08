@@ -6,5 +6,10 @@
 }
 .accept-button{
     width: 20%;
-    color: rgba(191,172,200, 0.7);
+    color: rgba(18, 198, 30, 0.7);
+}
+
+.decline-button {
+    width: 20%;
+    color: rgba(244, 0, 0, 0.7);
 }
