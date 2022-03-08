@@ -1,8 +1,10 @@
 .dare-box {
     border-radius: 3.5rem;
 }
-
-
 .dare-text {
     color: rgba(172,77,218, 0.7);
+}
+.accept-button{
+    width: 20%;
+    color: rgba(191,172,200, 0.7);
 }
