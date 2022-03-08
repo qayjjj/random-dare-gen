@@ -46,7 +46,7 @@ function Home() {
         <h1 className="header text-5xl drop-shadow-lg font-semibold">
           Who are the players?
         </h1>
-        <img src={arrow} className="h-20 absolute -right-44 top-2.5" />
+        <img src={arrow} className="h-20 absolute -right-44 top-2.5" alt="arrow.png"/>
       </div>
 
       <input
@@ -67,7 +67,7 @@ function Home() {
         >
           Start
         </span>
-        <img src={inputValid ? whiteTriangle : triangle} className="h-8" />
+        <img src={inputValid ? whiteTriangle : triangle} className="h-8" alt="Triangle.png"/>
       </div>
     </div>
   );
