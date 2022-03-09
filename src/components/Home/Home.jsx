@@ -15,20 +15,14 @@ function Home() {
         setInputValid(true);
         document
           .getElementById("start-button")
-          .classList.add("drop-shadow-lg", "bg-[#a3e635]", "cursor-pointer");
-        document
-          .getElementById("start-text")
-          .classList.add("drop-shadow-lg", "text-white");
+          .classList.add("start-button-clickable");
       }
     } else {
       if (inputValid) {
         setInputValid(false);
         document
           .getElementById("start-button")
-          .classList.remove("drop-shadow-md", "bg-[#a3e635]", "cursor-pointer");
-        document
-          .getElementById("start-text")
-          .classList.remove("drop-shadow-md", "text-white");
+          .classList.remove("start-button-clickable");
       }
     }
   };
@@ -46,7 +40,11 @@ function Home() {
         <h1 className="header text-5xl drop-shadow-lg font-semibold">
           Who are the players?
         </h1>
-        <img src={arrow} className="h-20 absolute -right-44 top-2.5" alt="arrow.png"/>
+        <img
+          src={arrow}
+          className="h-20 absolute -right-44 top-2.5"
+          alt="arrow.png"
+        />
       </div>
 
       <input
@@ -58,16 +56,17 @@ function Home() {
 
       <div
         id="start-button"
-        className="mt-12 bg-white h-20 px-12 rounded-full start-button flex place-content-center items-center justify-between"
+        className="start-button w-1/5 mt-12 h-20 px-12 rounded-full flex place-content-center items-center justify-between"
         onClick={inputValid ? handleOnClick : null}
       >
-        <span
-          id="start-text"
-          className="text-5xl font-extrabold tracking-widest"
-        >
+        <span className="start-text text-5xl font-extrabold tracking-widest">
           Start
         </span>
-        <img src={inputValid ? whiteTriangle : triangle} className="h-8" alt="Triangle.png"/>
+        <img
+          src={inputValid ? whiteTriangle : triangle}
+          className="h-8"
+          alt="Triangle.png"
+        />
       </div>
     </div>
   );
