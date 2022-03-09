@@ -1,9 +1,11 @@
 .dare-box {
     border-radius: 3.5rem;
 }
+
 .dare-text {
     color: rgba(172,77,218, 0.7);
 }
+
 .accept-button{
     background-color: rgba(77, 124, 15, 0.7);
     color: rgba(226,232,240, 0.7);
@@ -13,7 +15,9 @@
     background-color: rgb(163,230,53);
     color: white;
     cursor: pointer;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
+
 .accept-button:hover > .accept-text {
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
