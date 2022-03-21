@@ -6,35 +6,34 @@ function Dare() {
   const { players } = DareState.useContainer();
   const dares = require("./Dares.json");
 
+  const [daresLeft, setDaresLeft] = useState(dares.length);
+
   const [currentPlayer, setCurrentPlayer] = useState(
     players[Math.floor(Math.random() * players.length)]
   );
-  const [currentDare, setCurrentDare] = useState(
-    dares[Math.floor(Math.random() * dares.length)]
+
+  const getRandomDare = () => {
+    // console.log(daresLeft);
+    const index = Math.floor(Math.random() * daresLeft);
+    const dare = dares[index];
+
+    dares[index] = dares[daresLeft - 1];
+    dares[daresLeft - 1] = dare;
+    setDaresLeft(daresLeft - 1);
+
+    // console.log(daresLeft);
+    if (daresLeft === 1) setDaresLeft(dares.length);
+    return dare;
+  }
+
+  const [currentDare, setCurrentDare] = useState(() => 
+    getRandomDare()
   );
 
   const handleOnClick = () => {
     setCurrentPlayer(players[Math.floor(Math.random() * players.length)]);
-    setCurrentDare(dares[Math.floor(Math.random() * dares.length)]);
+    setCurrentDare(getRandomDare());
   };
-
-  // const declineOnMouseEnter = () => {
-  //   document
-  //     .getElementById("decline-button")
-  //     .classList.add("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
-  //   document
-  //     .getElementById("decline-text")
-  //     .classList.add("drop-shadow-lg", "text-white");
-  // };
-
-  // const declineOnMouseLeave = () => {
-  //   document
-  //     .getElementById("decline-button")
-  //     .classList.remove("drop-shadow-lg", "bg-lime-400", "cursor-pointer");
-  //   document
-  //     .getElementById("decline-text")
-  //     .classList.remove("drop-shadow-lg", "text-white");
-  // };
 
   return (
     <div className="flex flex-col items-center mt-44">
