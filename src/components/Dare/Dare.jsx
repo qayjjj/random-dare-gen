@@ -6,14 +6,22 @@ function Dare() {
   const { players } = DareState.useContainer();
   const dares = require("./Dares.json");
 
+  const [playersLeft, setPlayersLeft] = useState(players.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
 
-  const [currentPlayer, setCurrentPlayer] = useState(
-    players[Math.floor(Math.random() * players.length)]
-  );
+  const getRandomPlayer = () => {
+    const index = Math.floor(Math.random() * playersLeft);
+    const player = players[index];
+
+    players[index] = players[playersLeft - 1];
+    players[playersLeft - 1] = player;
+    setPlayersLeft(playersLeft - 1);
+
+    if (playersLeft === 1) setPlayersLeft(players.length);
+    return player;
+  }
 
   const getRandomDare = () => {
-    // console.log(daresLeft);
     const index = Math.floor(Math.random() * daresLeft);
     const dare = dares[index];
 
@@ -21,17 +29,21 @@ function Dare() {
     dares[daresLeft - 1] = dare;
     setDaresLeft(daresLeft - 1);
 
-    // console.log(daresLeft);
     if (daresLeft === 1) setDaresLeft(dares.length);
     return dare;
   }
+
+  const [currentPlayer, setCurrentPlayer] = useState(() =>
+    getRandomPlayer()
+  );
 
   const [currentDare, setCurrentDare] = useState(() => 
     getRandomDare()
   );
 
   const handleOnClick = () => {
-    setCurrentPlayer(players[Math.floor(Math.random() * players.length)]);
+    setCurrentPlayer(getRandomPlayer());
+    // setCurrentPlayer(players[Math.floor(Math.random() * playersLeft)]);
     setCurrentDare(getRandomDare());
   };
 
