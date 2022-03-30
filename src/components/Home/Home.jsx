@@ -29,7 +29,9 @@ function Home() {
 
   const handleOnClick = () => {
     const input = document.getElementById("name-input").value;
-    const players = input.replaceAll(/\s/g, "").split(",");
+    const names = input.replaceAll(/\s/g, "").split(",");
+    let players = [];
+    names.map((name) => players.push({ name: name, score: 0 }));
     setStartGame(true);
     setPlayers(players);
   };
