@@ -5,21 +5,21 @@ import "./styles.css";
 
 function Dare() {
   const { players, setPlayers } = DareState.useContainer();
-  const tempPlayers = players;
+  const tempPlayers = players.slice();
   const dares = require("./Dares.json");
 
-  const [playersLeft, setPlayersLeft] = useState(players.length);
+  const [playersLeft, setPlayersLeft] = useState(tempPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
 
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
-    const player = players[index];
+    const player = tempPlayers[index];
 
-    players[index] = players[playersLeft - 1];
-    players[playersLeft - 1] = player;
+    tempPlayers[index] = tempPlayers[playersLeft - 1];
+    tempPlayers[playersLeft - 1] = player;
     setPlayersLeft(playersLeft - 1);
 
-    if (playersLeft === 1) setPlayersLeft(players.length);
+    if (playersLeft === 1) setPlayersLeft(tempPlayers.length);
     return player;
   };
 
