@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import DareState from "./Dare.state.jsx";
+import {useTimer} from "react-timer-hook";
 import Scores from "../Scores/Scores";
 import "./styles.css";
 
 function Dare() {
-  const { players, setPlayers } = DareState.useContainer();
-  const tempPlayers = players.slice();
+  // Setting up initial arrays
+  const { players } = DareState.useContainer();
+  const [tempPlayers, setTempPlayers] = useState(players.slice().concat(players));
   const dares = require("./Dares.json");
 
   const [playersLeft, setPlayersLeft] = useState(tempPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
 
+  // Closure to choose a random player from the tempPlayer array
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
     const player = tempPlayers[index];
@@ -23,6 +26,7 @@ function Dare() {
     return player;
   };
 
+  // Closure to choose a random dare from the dares array
   const getRandomDare = () => {
     const index = Math.floor(Math.random() * daresLeft);
     const dare = dares[index];
@@ -40,19 +44,20 @@ function Dare() {
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
-    const playerIndex = tempPlayers.indexOf(currentPlayer);
-    tempPlayers[playerIndex].score--;
+    const playerIndex = players.indexOf(currentPlayer);
+    players[playerIndex].score--;
     handleNextDare();
   };
 
   const handleAccept = () => {
-    const playerIndex = tempPlayers.indexOf(currentPlayer);
-    tempPlayers[playerIndex].score++;
+    const playerIndex = players.indexOf(currentPlayer);
+    players[playerIndex].score++;
     handleNextDare();
   };
 
   const handleNextDare = () => {
-    setPlayers(tempPlayers);
+    // setPlayers(tempPlayers);
+    console.log(tempPlayers);
     console.log(players);
     setCurrentPlayer(getRandomPlayer());
     setCurrentDare(getRandomDare());
