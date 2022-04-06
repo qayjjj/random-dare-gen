@@ -1,28 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DareState from "./Dare.state.jsx";
-import {useTimer} from "react-timer-hook";
-import Scores from "../Scores/Scores";
+// import Scores from "../Scores/Scores";
 import "./styles.css";
 
 function Dare() {
-  // Setting up initial arrays
   const { players } = DareState.useContainer();
-  const [tempPlayers, setTempPlayers] = useState(players.slice().concat(players));
+
+  // An array of duplicate players to prevent predictable player cycle, and the dare array 
+  const [dupPlayers, setDupPlayers] = useState(players.slice().concat(players));
   const dares = require("./Dares.json");
 
-  const [playersLeft, setPlayersLeft] = useState(tempPlayers.length);
+  const initCountdown = 3000, frequency = 8;
+  const [countdown, setCountdown] = useState(initCountdown);
+  const [currentNameIndex, setCurrentNameIndex] = useState(0);
+
+  const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (countdown > 0) {
+        setCountdown(countdown - initCountdown / frequency);
+        if (currentNameIndex + 1 >= dupPlayers.length) {
+          setCurrentNameIndex(0);  
+        } else setCurrentNameIndex(currentNameIndex + 1);
+      }
+    }, initCountdown / frequency);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [countdown, currentNameIndex, dupPlayers]);
 
   // Closure to choose a random player from the tempPlayer array
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
-    const player = tempPlayers[index];
+    const player = dupPlayers[index];
+    setCurrentNameIndex((playersLeft + dupPlayers.length - frequency - 1) % dupPlayers.length);
 
-    tempPlayers[index] = tempPlayers[playersLeft - 1];
-    tempPlayers[playersLeft - 1] = player;
+    dupPlayers[index] = dupPlayers[playersLeft - 1];
+    dupPlayers[playersLeft - 1] = player;
     setPlayersLeft(playersLeft - 1);
 
-    if (playersLeft === 1) setPlayersLeft(tempPlayers.length);
+    if (playersLeft === 1) setPlayersLeft(dupPlayers.length);
+    console.log(dupPlayers);
     return player;
   };
 
@@ -40,25 +61,23 @@ function Dare() {
   };
 
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
-
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
     const playerIndex = players.indexOf(currentPlayer);
     players[playerIndex].score--;
     handleNextDare();
+    setCountdown(initCountdown);
   };
 
   const handleAccept = () => {
     const playerIndex = players.indexOf(currentPlayer);
     players[playerIndex].score++;
     handleNextDare();
+    setCountdown(initCountdown);
   };
 
   const handleNextDare = () => {
-    // setPlayers(tempPlayers);
-    console.log(tempPlayers);
-    console.log(players);
     setCurrentPlayer(getRandomPlayer());
     setCurrentDare(getRandomDare());
   };
@@ -66,7 +85,8 @@ function Dare() {
   return (
     <div className="flex flex-col items-center mt-36">
       <h1 className="text-5xl drop-shadow-lg font-semibold">
-        {currentPlayer.name}
+        {dupPlayers[currentNameIndex].name}
+        {/* {currentNameIndex} */}
       </h1>
 
       {/* Current Dare */}
