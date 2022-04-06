@@ -65,7 +65,7 @@ function Dare() {
 
   const handleDecline = () => {
     const playerIndex = players.indexOf(currentPlayer);
-    players[playerIndex].score--;
+    players[playerIndex].score = Math.max(0, players[playerIndex].score - 1);
     handleNextDare();
     setCountdown(initCountdown);
   };
