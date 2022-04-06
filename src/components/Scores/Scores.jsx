@@ -3,22 +3,18 @@ import DareState from "../Dare/Dare.state.jsx";
 
 function Scores() {
   const { players } = DareState.useContainer();
-  const tempPlayers = players;
-  const scoreTable = useEffect(() => {
-    console.log("hi");
-    // tempPlayers.map((player) => {
-    //   return (
-    //     <tr key={player.name}>
-    //       <td>
-    //         <span>{player.name}</span>
-    //       </td>
-    //       <td>
-    //         <span>{player.score}</span>
-    //       </td>
-    //     </tr>
-    //   );
-    // });
-  }, [players]);
+  const scoreTable = players.map((player) => {
+    return (
+      <tr key={player.name}>
+        <td>
+          <span>{player.name}</span>
+        </td>
+        <td>
+          <span>{player.score}</span>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <table className="text-left w-40 fixed top-24">
