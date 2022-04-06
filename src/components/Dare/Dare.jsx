@@ -36,7 +36,7 @@ function Dare() {
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
     const player = dupPlayers[index];
-    setCurrentNameIndex((playersLeft + dupPlayers.length - frequency - 1) % dupPlayers.length);
+    setCurrentNameIndex((playersLeft + 3 * dupPlayers.length - frequency - 1) % dupPlayers.length);
 
     dupPlayers[index] = dupPlayers[playersLeft - 1];
     dupPlayers[playersLeft - 1] = player;
