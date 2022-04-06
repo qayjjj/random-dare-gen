@@ -4,7 +4,7 @@ import DareState from "./Dare.state.jsx";
 import "./styles.css";
 
 function Dare() {
-  const { players } = DareState.useContainer();
+  const { players, setPlayers } = DareState.useContainer();
 
   // An array of duplicate players to prevent predictable player cycle, and the dare array 
   const [dupPlayers, setDupPlayers] = useState(players.slice().concat(players));
@@ -42,7 +42,6 @@ function Dare() {
     setPlayersLeft(playersLeft - 1);
 
     if (playersLeft === 1) setPlayersLeft(dupPlayers.length);
-    console.log(dupPlayers);
     return player;
   };
 
@@ -63,18 +62,26 @@ function Dare() {
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
-    if(countdown === 0) {
-      const playerIndex = players.indexOf(currentPlayer);
-      players[playerIndex].score = Math.max(0, players[playerIndex].score - 1);
+    if (countdown === 0) {
+      setPlayers(players.map((player) => {
+        if (player.name === currentPlayer.name) {
+          player.score--;
+        }
+        return player;  
+      }));
       handleNextDare();
       setCountdown(initCountdown);
     }
   };
 
   const handleAccept = () => {
-    if(countdown === 0) {
-      const playerIndex = players.indexOf(currentPlayer);
-      players[playerIndex].score++;
+    if (countdown === 0) {
+      setPlayers(players.map((player) => {
+        if (player.name === currentPlayer.name) {
+          player.score++;
+        }
+        return player;  
+      }));
       handleNextDare();
       setCountdown(initCountdown);
     }   

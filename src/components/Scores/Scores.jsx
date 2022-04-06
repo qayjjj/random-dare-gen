@@ -1,9 +1,9 @@
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import DareState from "../Dare/Dare.state.jsx";
 
 function Scores() {
   const { players } = DareState.useContainer();
-  const scoreTable = players.map((player) => {
+  const scoreTable = () => players.map((player) => {
     return (
       <tr key={player.name}>
         <td>
@@ -22,7 +22,7 @@ function Scores() {
         <tr>
           <th colSpan={2}>Scores</th>
         </tr>
-        {scoreTable}
+        {scoreTable()}
       </tbody>
     </table>
   );
