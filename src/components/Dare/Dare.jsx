@@ -26,7 +26,6 @@ function Dare() {
         } else setCurrentNameIndex(currentNameIndex + 1);
       }
     }, initCountdown / frequency);
-
     return () => {
       clearInterval(interval);
     };
@@ -64,17 +63,21 @@ function Dare() {
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
-    const playerIndex = players.indexOf(currentPlayer);
-    players[playerIndex].score = Math.max(0, players[playerIndex].score - 1);
-    handleNextDare();
-    setCountdown(initCountdown);
+    if(countdown === 0) {
+      const playerIndex = players.indexOf(currentPlayer);
+      players[playerIndex].score = Math.max(0, players[playerIndex].score - 1);
+      handleNextDare();
+      setCountdown(initCountdown);
+    }
   };
 
   const handleAccept = () => {
-    const playerIndex = players.indexOf(currentPlayer);
-    players[playerIndex].score++;
-    handleNextDare();
-    setCountdown(initCountdown);
+    if(countdown === 0) {
+      const playerIndex = players.indexOf(currentPlayer);
+      players[playerIndex].score++;
+      handleNextDare();
+      setCountdown(initCountdown);
+    }   
   };
 
   const handleNextDare = () => {
