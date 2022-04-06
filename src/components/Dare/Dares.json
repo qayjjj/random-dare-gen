@@ -23,5 +23,20 @@
         "text": "Make a frog sound",
         "playerNum": 1,
         "filter": "Family"
+    },
+    {
+        "text": "Spin until you are dizzy",
+        "playerNum": 1,
+        "filter": "Family"
+    },
+    {
+        "text": "Do a lap around the building",
+        "playerNum": 1,
+        "filter": "Family"
+    },
+    {
+        "text": "Attempt a handstand",
+        "playerNum": 1,
+        "filter": "Family"
     }
 ]
