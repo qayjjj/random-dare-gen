@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DareState from "./Dare.state.jsx";
-// import Scores from "../Scores/Scores";
+import Pause from "../Pause/Pause";
 import "./styles.css";
 
 function Dare() {
-  const { players, setPlayers } = DareState.useContainer();
+  const { players, setPlayers, paused, setPaused } = DareState.useContainer();
 
-  // An array of duplicate players to prevent predictable player cycle, and the dare array 
+  // An array of duplicate players to prevent predictable player cycle, and the dare array
   const [dupPlayers, setDupPlayers] = useState(players.slice().concat(players));
   const dares = require("./Dares.json");
 
-  const initCountdown = 3000, frequency = 8;
+  const initCountdown = 3000,
+    frequency = 30;
   const [countdown, setCountdown] = useState(initCountdown);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
 
@@ -22,7 +23,7 @@ function Dare() {
       if (countdown > 0) {
         setCountdown(countdown - initCountdown / frequency);
         if (currentNameIndex + 1 >= dupPlayers.length) {
-          setCurrentNameIndex(0);  
+          setCurrentNameIndex(0);
         } else setCurrentNameIndex(currentNameIndex + 1);
       }
     }, initCountdown / frequency);
@@ -35,7 +36,9 @@ function Dare() {
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
     const player = dupPlayers[index];
-    setCurrentNameIndex((playersLeft + 3 * dupPlayers.length - frequency - 1) % dupPlayers.length);
+    setCurrentNameIndex(
+      (playersLeft + 3 * dupPlayers.length - frequency - 1) % dupPlayers.length
+    );
 
     dupPlayers[index] = dupPlayers[playersLeft - 1];
     dupPlayers[playersLeft - 1] = player;
@@ -63,40 +66,43 @@ function Dare() {
 
   const handleDecline = () => {
     if (countdown === 0) {
-      setPlayers(players.map((player) => {
-        if (player.name === currentPlayer.name) {
-          player.score--;
-        }
-        return player;  
-      }));
+      setPlayers(
+        players.map((player) => {
+          if (player.name === currentPlayer.name) {
+            player.score--;
+          }
+          return player;
+        })
+      );
       handleNextDare();
-      setCountdown(initCountdown);
     }
   };
 
   const handleAccept = () => {
     if (countdown === 0) {
-      setPlayers(players.map((player) => {
-        if (player.name === currentPlayer.name) {
-          player.score++;
-        }
-        return player;  
-      }));
-      handleNextDare();
-      setCountdown(initCountdown);
-    }   
+      setPlayers(
+        players.map((player) => {
+          if (player.name === currentPlayer.name) {
+            player.score++;
+          }
+          return player;
+        })
+      );
+      setPaused(true);
+    }
   };
 
   const handleNextDare = () => {
     setCurrentPlayer(getRandomPlayer());
     setCurrentDare(getRandomDare());
+    setCountdown(initCountdown);
   };
 
   return (
     <div className="flex flex-col items-center mt-36">
+      {/* Current Player */}
       <h1 className="text-5xl drop-shadow-lg font-semibold">
         {dupPlayers[currentNameIndex].name}
-        {/* {currentNameIndex} */}
       </h1>
 
       {/* Current Dare */}
@@ -125,6 +131,8 @@ function Dare() {
           </span>
         </div>
       </div>
+
+      {paused && <Pause handleNextDare={handleNextDare} />}
     </div>
   );
 }

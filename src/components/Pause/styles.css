@@ -1,0 +1,19 @@
+.done-button{
+    background-color: rgba(77, 124, 15);
+    color: rgba(226,232,240, 0.7);
+}
+
+.done-button:hover {
+    background-color: rgb(163,230,53);
+    color: white;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.overlay {
+    z-index: 1000;
+}
+
+.overlay-content {
+    z-index: 99999;
+}
