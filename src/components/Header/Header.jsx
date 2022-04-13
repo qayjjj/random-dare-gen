@@ -1,9 +1,8 @@
 import React from "react";
 import DareState from "../Dare/Dare.state.jsx";
-import Scores from "../Scores/Scores";
 
 function Header() {
-  const { startGame, setStartGame, setPlayers } = DareState.useContainer();
+  const { setStartGame, setPlayers } = DareState.useContainer();
 
   const handleClick = () => {
     setStartGame(false);
@@ -18,7 +17,6 @@ function Header() {
       >
         Random Dare Generator
       </h1>
-      {startGame && <Scores />}
     </div>
   );
 }

@@ -1,9 +1,9 @@
-.done-button{
+.success-button{
     background-color: rgba(77, 124, 15);
     color: rgba(226,232,240, 0.7);
 }
 
-.done-button:hover {
+.success-button:hover {
     background-color: rgb(163,230,53);
     color: white;
     cursor: pointer;
