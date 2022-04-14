@@ -10,34 +10,33 @@ function Dare() {
   const [dupPlayers, setDupPlayers] = useState(players.slice().concat(players));
   const dares = require("./Dares.json");
 
-  const initCountdown = 3000,
-    frequency = 30;
-  const [countdown, setCountdown] = useState(initCountdown);
+  const totalTicks = 20;
+  const tickIntervals = [650, 400, 250, 150, 100, 50, 50, 100, 150, 250, 400, 650];
+  const [countdown, setCountdown] = useState(totalTicks);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
-
-  const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
-  const [daresLeft, setDaresLeft] = useState(dares.length);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (countdown > 0) {
-        setCountdown(countdown - initCountdown / frequency);
-        if (currentNameIndex + 1 >= dupPlayers.length) {
-          setCurrentNameIndex(0);
-        } else setCurrentNameIndex(currentNameIndex + 1);
+        setCountdown(countdown - 1);
+        setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
+        console.log(totalTicks - countdown);
       }
-    }, initCountdown / frequency);
+    }, Math.pow(1.1, totalTicks - countdown));
     return () => {
       clearInterval(interval);
     };
   }, [countdown, currentNameIndex, dupPlayers]);
 
-  // Closure to choose a random player from the tempPlayer array
+  const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
+  const [daresLeft, setDaresLeft] = useState(dares.length);
+
+  // Function object to choose a random player from the tempPlayer array
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
     const player = dupPlayers[index];
     setCurrentNameIndex(
-      (playersLeft + 3 * dupPlayers.length - frequency - 1) % dupPlayers.length
+      (playersLeft + dupPlayers.length - (totalTicks % dupPlayers.length) - 1) % dupPlayers.length
     );
 
     dupPlayers[index] = dupPlayers[playersLeft - 1];
@@ -48,7 +47,7 @@ function Dare() {
     return player;
   };
 
-  // Closure to choose a random dare from the dares array
+  // Function object to choose a random dare from the dares array
   const getRandomDare = () => {
     const index = Math.floor(Math.random() * daresLeft);
     const dare = dares[index];
@@ -95,7 +94,7 @@ function Dare() {
   const handleNextDare = () => {
     setCurrentPlayer(getRandomPlayer());
     setCurrentDare(getRandomDare());
-    setCountdown(initCountdown);
+    setCountdown(totalTicks);
   };
 
   return (
