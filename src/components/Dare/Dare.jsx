@@ -10,19 +10,22 @@ function Dare() {
   const [dupPlayers, setDupPlayers] = useState(players.slice().concat(players));
   const dares = require("./Dares.json");
 
-  const totalTicks = 20;
-  const tickIntervals = [650, 400, 250, 150, 100, 50, 50, 100, 150, 250, 400, 650];
-  const [countdown, setCountdown] = useState(totalTicks);
+  const tickIntervals = [
+    21, 13, 8, 5, 3, 2,                   // The ticker speeding up...
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   // Ticking...
+    2, 3, 5, 8, 13, 21, 34                // And slowing down.
+  ];
+  const tickMultiplier = 30;              // Multiplied with intervals to get length in ms
+  const [countdown, setCountdown] = useState(0);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (countdown > 0) {
-        setCountdown(countdown - 1);
+      if (countdown < tickIntervals.length) {
+        setCountdown(countdown + 1);
         setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
-        console.log(totalTicks - countdown);
       }
-    }, Math.pow(1.1, totalTicks - countdown));
+    }, tickIntervals[countdown] * tickMultiplier);
     return () => {
       clearInterval(interval);
     };
@@ -36,7 +39,7 @@ function Dare() {
     const index = Math.floor(Math.random() * playersLeft);
     const player = dupPlayers[index];
     setCurrentNameIndex(
-      (playersLeft + dupPlayers.length - (totalTicks % dupPlayers.length) - 1) % dupPlayers.length
+      (playersLeft + dupPlayers.length - (tickIntervals.length % dupPlayers.length) - 1) % dupPlayers.length
     );
 
     dupPlayers[index] = dupPlayers[playersLeft - 1];
@@ -64,7 +67,7 @@ function Dare() {
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
-    if (countdown === 0) {
+    if (countdown === tickIntervals.length) {
       setPlayers(
         players.map((player) => {
           if (player.name === currentPlayer.name) {
@@ -78,7 +81,7 @@ function Dare() {
   };
 
   const handleAccept = () => {
-    if (countdown === 0) {
+    if (countdown === tickIntervals.length) {
       setPlayers(
         players.map((player) => {
           if (player.name === currentPlayer.name) {
@@ -94,7 +97,7 @@ function Dare() {
   const handleNextDare = () => {
     setCurrentPlayer(getRandomPlayer());
     setCurrentDare(getRandomDare());
-    setCountdown(totalTicks);
+    setCountdown(0);
   };
 
   return (
