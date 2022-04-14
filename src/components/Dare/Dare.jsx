@@ -16,20 +16,20 @@ function Dare() {
     2, 3, 5, 8, 13, 21, 34                // And slowing down.
   ];
   const tickMultiplier = 30;              // Multiplied with intervals to get length in ms
-  const [countdown, setCountdown] = useState(0);
+  const [tickCount, setTickCount] = useState(0);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (countdown < tickIntervals.length) {
-        setCountdown(countdown + 1);
+      if (tickCount < tickIntervals.length) {
+        setTickCount(tickCount + 1);
         setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
       }
-    }, tickIntervals[countdown] * tickMultiplier);
+    }, tickIntervals[tickCount] * tickMultiplier);
     return () => {
       clearInterval(interval);
     };
-  }, [countdown, currentNameIndex, dupPlayers]);
+  }, [tickCount, currentNameIndex, dupPlayers]);
 
   const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
@@ -67,7 +67,7 @@ function Dare() {
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
-    if (countdown === tickIntervals.length) {
+    if (tickCount === tickIntervals.length) {
       setPlayers(
         players.map((player) => {
           if (player.name === currentPlayer.name) {
@@ -81,7 +81,7 @@ function Dare() {
   };
 
   const handleAccept = () => {
-    if (countdown === tickIntervals.length) {
+    if (tickCount === tickIntervals.length) {
       setPlayers(
         players.map((player) => {
           if (player.name === currentPlayer.name) {
@@ -97,7 +97,7 @@ function Dare() {
   const handleNextDare = () => {
     setCurrentPlayer(getRandomPlayer());
     setCurrentDare(getRandomDare());
-    setCountdown(0);
+    setTickCount(0);
   };
 
   return (
