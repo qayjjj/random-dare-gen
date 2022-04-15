@@ -3,8 +3,8 @@ import DareState from "../Dare/Dare.state.jsx";
 import Scores from "../Scores/Scores";
 import "./styles.css";
 
-function Pause({ handleNextDare }) {
-  const [showScores, setShowScores] = useState(false);
+function Pause({ acceptDare, handleNextDare }) {
+  const [showScores, setShowScores] = useState(!acceptDare);
   const { setPaused } = DareState.useContainer();
   const handleOnClick = () => {
     setPaused(false);
@@ -14,7 +14,7 @@ function Pause({ handleNextDare }) {
   return (
     <div className="fixed top-0 flex">
       <div className="absolute overlay w-screen h-screen bg-black opacity-90"></div>
-
+      {/* Scores */}
       {showScores ? (
         <div className="overlay-content w-screen flex flex-col items-center mt-60">
           <Scores />
@@ -29,6 +29,7 @@ function Pause({ handleNextDare }) {
         </div>
       ) : (
         <div className="overlay-content w-screen flex flex-col items-center mt-60">
+          {/* Complete dare & Done button */}
           <h1 className="text-6xl font-semibold">Complete your dare!</h1>
           <div
             className="success-button mt-12 w-64 h-24 rounded-full flex text-center justify-center items-center"
