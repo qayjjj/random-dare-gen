@@ -5,58 +5,52 @@ import "./styles.css";
 
 function Dare() {
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
-  // An array of duplicate players to prevent predictable player cycle, and the dare array
-  const [dupPlayers, setDupPlayers] = useState([...players]);
+  
+  // An array of duplicate players to prevent predictable player cycle
+  const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
   const dares = require("./Dares.json");
 
   const tickIntervals = [
-    21,
-    13,
-    8,
-    5,
-    3,
-    2, // The ticker speeding up...
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1, // Ticking...
-    2,
-    3,
-    5,
-    8,
-    13,
-    21,
-    34, // And slowing down.
+    21, 13, 8, 5, 3, 2,                 // The ticker speeding up...
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // Ticking...
+    2, 3, 5, 8, 13, 21, 34              // And slowing down.
   ];
   const tickMultiplier = 30; // Multiplied with intervals to get length in ms
   const [tickCount, setTickCount] = useState(0);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
 
+  const changeButtonsVis = () => {
+    const accept = document.getElementById("accept-button");
+    const decline = document.getElementById("decline-button");
+
+    if (tickCount < tickIntervals.length) {
+      accept.style.display = 'none';
+      decline.style.display = 'none';
+    } else {
+      accept.style.display = 'grid';
+      decline.style.display = 'grid';
+    }
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (tickCount < tickIntervals.length) {
+    changeButtonsVis();
+    if (tickCount < tickIntervals.length) {
+      const interval = setInterval(() => {
         setTickCount(tickCount + 1);
         setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
-      }
-    }, tickIntervals[tickCount] * tickMultiplier);
-    return () => {
-      clearInterval(interval);
-    };
+      }, tickIntervals[tickCount] * tickMultiplier);
+
+      return () => {
+        clearInterval(interval);
+      };
+    } else return;
   }, [tickCount, currentNameIndex, dupPlayers]);
 
   const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
   const [acceptDare, setAcceptDare] = useState(false);
 
-  // Function object to choose a random player from the tempPlayer array
+  // Choose a random player from the tempPlayer array
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
     const player = dupPlayers[index];
@@ -64,8 +58,8 @@ function Dare() {
       (playersLeft +
         dupPlayers.length -
         (tickIntervals.length % dupPlayers.length) -
-        1) %
-        dupPlayers.length
+      1) %
+      dupPlayers.length
     );
 
     dupPlayers[index] = dupPlayers[playersLeft - 1];
@@ -92,7 +86,6 @@ function Dare() {
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
-  //
   const handleDecline = () => {
     if (tickCount === tickIntervals.length) {
       setPlayers(
@@ -146,6 +139,7 @@ function Dare() {
       {/* Accept and Decline buttons */}
       <div className="flex justify-between w-3/6 px-10">
         <div
+          id="decline-button"
           className="decline-button w-3/7 mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
           onClick={handleDecline}
         >
@@ -154,6 +148,7 @@ function Dare() {
           </span>
         </div>
         <div
+          id="accept-button"
           className="accept-button w-3/7 mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
           onClick={handleAccept}
         >

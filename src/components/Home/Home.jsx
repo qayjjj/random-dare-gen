@@ -51,7 +51,7 @@ function Home() {
 
       <input
         id="name-input"
-        placeholder="Enter player names e.g. Jane, John, Jack"
+        placeholder="Enter names separated by commas e.g. Jane, John, Jack"
         className="name-input mt-12 w-6/12 h-16 rounded-full drop-shadow-lg text-black py-5 px-8 text-xl"
         onChange={(e) => handleOnChange(e)}
       ></input>
