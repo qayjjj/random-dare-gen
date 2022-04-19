@@ -87,33 +87,29 @@ function Dare() {
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
   const handleDecline = () => {
-    if (tickCount === tickIntervals.length) {
-      setPlayers(
-        players.map((player) => {
-          if (player.name === currentPlayer.name) {
-            player.score--;
-          }
-          return player;
-        })
-      );
-      setAcceptDare(false);
-      setPaused(true);
-    }
+    setPlayers(
+      players.map((player) => {
+        if (player.name === currentPlayer.name) {
+          player.score--;
+        }
+        return player;
+      })
+    );
+    setAcceptDare(false);
+    setPaused(true);
   };
 
   const handleAccept = () => {
-    if (tickCount === tickIntervals.length) {
-      setPlayers(
-        players.map((player) => {
-          if (player.name === currentPlayer.name) {
-            player.score++;
-          }
-          return player;
-        })
-      );
-      setAcceptDare(true);
-      setPaused(true);
-    }
+    setPlayers(
+      players.map((player) => {
+        if (player.name === currentPlayer.name) {
+          player.score++;
+        }
+        return player;
+      })
+    );
+    setAcceptDare(true);
+    setPaused(true);
   };
 
   const handleNextDare = () => {
