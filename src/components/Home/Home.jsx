@@ -81,7 +81,7 @@ function Home() {
       </div>
 
       <div
-        className="add-player-button w-1/4 mt-4 rounded-full drop-shadow-lg h-10 cursor-pointer grid place-items-center"
+        className="add-player-button 'w-1/4 sm:w-1/6 lg:w-1/2' mt-4 rounded-full drop-shadow-lg h-10 cursor-pointer grid place-items-center"
         onClick={() => handleAddPlayer()}
       >
         <span className="text-5xl font-bold plus-sign -mt-2">+</span>
@@ -89,7 +89,7 @@ function Home() {
 
       <div
         id="start-button"
-        className="start-button w-1/5 mt-12 h-20 px-12 rounded-full flex place-content-center items-center justify-between"
+        className="start-button 'w-1/5 sm:w-1/8 lg:w-1/3' mt-12 h-20 px-12 rounded-full flex place-content-center items-center justify-between"
         onClick={inputValid ? handleOnClick : null}
       >
         <span className="start-text text-5xl font-extrabold tracking-widest">
