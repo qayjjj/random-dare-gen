@@ -19,22 +19,10 @@ function Dare() {
   const [tickCount, setTickCount] = useState(0);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
 
-  const changeButtonsVis = () => {
-    const accept = document.getElementById("accept-button");
-    const decline = document.getElementById("decline-button");
-
-    if (tickCount < tickIntervals.length) {
-      accept.style.display = 'none';
-      decline.style.display = 'none';
-    } else {
-      accept.style.display = 'grid';
-      decline.style.display = 'grid';
-    }
-  }
+  const isAnimating = () => tickCount < tickIntervals.length;
 
   useEffect(() => {
-    changeButtonsVis();
-    if (tickCount < tickIntervals.length) {
+    if (isAnimating()) {
       const interval = setInterval(() => {
         setTickCount(tickCount + 1);
         setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
@@ -121,9 +109,11 @@ function Dare() {
   return (
     <div className="flex flex-col items-center mt-36">
       {/* Current Player */}
-      <h1 className="text-5xl drop-shadow-lg font-semibold">
-        {dupPlayers[currentNameIndex].name}
-      </h1>
+      <div className={isAnimating() ? null : "animation-name-selected"}>
+        <h1 className="text-5xl drop-shadow-lg font-semibold">
+          {dupPlayers[currentNameIndex].name}
+        </h1>
+      </div>
 
       {/* Current Dare */}
       <div className="dare-box bg-white h-48 w-3/6 mt-8 grid place-items-center px-14 text-center">
@@ -133,26 +123,28 @@ function Dare() {
       </div>
 
       {/* Accept and Decline buttons */}
-      <div className="flex justify-between w-3/6 px-10">
-        <div
-          id="decline-button"
-          className="decline-button w-3/7 mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
-          onClick={handleDecline}
-        >
-          <span className="decline-text text-5xl font-extrabold tracking-widest">
-            Decline
-          </span>
+      {!isAnimating() &&
+        <div className="flex justify-between w-3/6 px-10">
+          <div
+            id="decline-button"
+            className="decline-button w-3/7 mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
+            onClick={handleDecline}
+          >
+            <span className="decline-text text-5xl font-extrabold tracking-widest">
+              Decline
+            </span>
+          </div>
+          <div
+            id="accept-button"
+            className="accept-button w-3/7 mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
+            onClick={handleAccept}
+          >
+            <span className="accept-text text-5xl font-extrabold tracking-widest">
+              Accept
+            </span>
+          </div>
         </div>
-        <div
-          id="accept-button"
-          className="accept-button w-3/7 mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
-          onClick={handleAccept}
-        >
-          <span className="accept-text text-5xl font-extrabold tracking-widest">
-            Accept
-          </span>
-        </div>
-      </div>
+      }
 
       {/* Pause screen */}
       {paused && (

@@ -66,7 +66,7 @@ function Home() {
         </span>
         <img
           src={inputValid ? whiteTriangle : triangle}
-          className="h-8"
+          className="arrow-pic h-8"
           alt="Triangle.png"
         />
       </div>

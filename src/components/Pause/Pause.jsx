@@ -22,7 +22,7 @@ function Pause({ acceptDare, handleNextDare }) {
             className="success-button mt-8 w-64 h-24 rounded-full flex text-center justify-center items-center"
             onClick={() => handleOnClick()}
           >
-            <span className="text-5xl font-extrabold tracking-widest">
+            <span className="success-text text-5xl font-extrabold tracking-widest">
               Next
             </span>
           </div>
@@ -35,7 +35,7 @@ function Pause({ acceptDare, handleNextDare }) {
             className="success-button mt-12 w-64 h-24 rounded-full flex text-center justify-center items-center"
             onClick={() => setShowScores(true)}
           >
-            <span className="text-5xl font-extrabold tracking-widest">
+            <span className="success-text text-5xl font-extrabold tracking-widest">
               Done
             </span>
           </div>
