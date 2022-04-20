@@ -8,7 +8,6 @@ import "./styles.css";
 function Home() {
   const { setStartGame, setPlayers } = DareState.useContainer();
   const [inputValid, setInputValid] = useState(false);
-  const [numPlayers, setNumPlayers] = useState(1);
 
   const handleOnChange = (e) => {
     if (e.target.value) {
@@ -98,7 +97,7 @@ function Home() {
         </span>
         <img
           src={inputValid ? whiteTriangle : triangle}
-          className="h-8"
+          className="arrow-pic h-8"
           alt="Triangle.png"
         />
       </div>

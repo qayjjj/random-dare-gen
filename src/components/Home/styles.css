@@ -24,6 +24,15 @@ img {
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
 
+.start-button-clickable > .arrow-pic {
+  animation: drag 1s infinite;
+}
+
+@keyframes drag { 
+  40% {transform: translateX(7px);}
+  60% {transform: translateX(0);}
+}
+
 .input-field:focus {
     outline-color: rgb(172,77,218);
 }

@@ -1,3 +1,10 @@
+@keyframes bounce {
+  30% {transform: translateY(-10px);}
+  50% {transform: translateY(0);} 
+  60% {transform: translateY(-2px);}
+  100% {transform: translateY(0);}
+}
+
 .success-button{
     background-color: rgba(77, 124, 15);
     color: rgba(226,232,240, 0.7);
@@ -8,6 +15,10 @@
     color: white;
     cursor: pointer;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.success-button:hover > .success-text {
+  animation: bounce 1s ease infinite;
 }
 
 .overlay {
