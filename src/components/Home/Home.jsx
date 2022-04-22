@@ -65,8 +65,9 @@ function Home() {
         id="name-input-fields"
         className="mt-6 w-1/4 text-black text-xl flex flex-col items-center relative"
       >
-        <div className="name-input relative w-full flex">
+        <div  className="name-input relative w-full flex">
           <input
+          id="name-input"
             placeholder="Enter player's name"
             className="input-field mt-2 w-full h-10 rounded-full drop-shadow-lg py-5 px-8 relative"
             onChange={(e) => handleOnChange(e)}
