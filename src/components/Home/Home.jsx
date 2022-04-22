@@ -54,11 +54,11 @@ function Home() {
         <h1 className="header text-5xl drop-shadow-lg font-semibold">
           Who are the players?
         </h1>
-        <img
+        {/* <img
           src={arrow}
           className="h-20 absolute -right-44 top-2.5"
           alt="arrow.png"
-        />
+        /> */}
       </div>
 
       <div

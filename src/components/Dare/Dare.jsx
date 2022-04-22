@@ -107,7 +107,7 @@ function Dare() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-36">
+    <div className="flex flex-col items-center mt-32">
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
         <h1 className="text-5xl drop-shadow-lg font-semibold">
@@ -116,7 +116,7 @@ function Dare() {
       </div>
 
       {/* Current Dare */}
-      <div className="dare-box bg-white h-48 'w-1/2 sm:w-1/3 lg:w-2/3' mt-8 grid place-items-center px-14 text-center">
+      <div className="dare-box bg-white h-48 w-2/5 mt-8 grid place-items-center px-14 text-center">
         <span className="dare-text drop-shadow-md font-semibold text-3xl">
           {currentDare.text}
         </span>
@@ -124,10 +124,10 @@ function Dare() {
 
       {/* Accept and Decline buttons */}
       {!isAnimating() &&
-        <div className="flex justify-between 'w-1/2 sm:w-1/3 lg:w-2/3' px-10">
+        <div className="flex justify-between 'w-2/5 sm:w-1/2 lg:w-2/3' px-10">
           <div
             id="decline-button"
-            className="decline-button 'w-3/7 sm:w-2/7 lg:w-4/7' mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
+            className="decline-button 'w-1/7 sm:w-2/7 md:w-3/7 lg:w-4/7' mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
             onClick={handleDecline}
           >
             <span className="decline-text text-5xl font-extrabold tracking-widest">
@@ -136,7 +136,7 @@ function Dare() {
           </div>
           <div
             id="accept-button"
-            className="accept-button 'w-3/7 sm:w-2/7 lg:w-4/7' mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
+            className="accept-button 'w-1/7 sm:w-2/7 md:w-3/7 lg:w-4/7' mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
             onClick={handleAccept}
           >
             <span className="accept-text text-5xl font-extrabold tracking-widest">
