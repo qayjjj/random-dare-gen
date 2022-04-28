@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import DareState from "./Dare.state.jsx";
 import Pause from "../Pause/Pause";
+import check1 from "./check1.svg";
+import check2 from "./check2.svg";
+import x1 from "./x1.svg";
+import x2 from "./x2.svg";
 import "./styles.css";
 
 function Dare() {
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
-  
+
   // An array of duplicate players to prevent predictable player cycle. Also assists animation
   const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
   const dares = require("./Dares.json");
@@ -14,10 +18,32 @@ function Dare() {
   // Animation for flashing names
   // -------------------------------------------------------------------------
 
-  const nameTickerIntervals = [
-    21, 13, 8, 5, 3, 2,                 // The ticker speeding up...
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // Ticking...
-    2, 3, 5, 8, 13, 21, 34              // And slowing down.
+  const tickIntervals = [
+    21,
+    13,
+    8,
+    5,
+    3,
+    2, // The ticker speeding up...
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1, // Ticking...
+    2,
+    3,
+    5,
+    8,
+    13,
+    21,
+    34, // And slowing down.
   ];
   const itvMultiplier = 20; // Multiplied with intervals to get length in ms
   const [tickCount, setTickCount] = useState(0);
@@ -126,44 +152,52 @@ function Dare() {
   // -------------------------------------------------------------------------
 
   return (
-    <div className="flex flex-col items-center mt-32">
+    <div className="flex flex-col items-center mt-12 md:mt-16 lg:mt-24">
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
-        <h1 className="text-5xl drop-shadow-lg font-semibold">
+        <h1 className="text-3xl md:text-4xl drop-shadow-lg font-semibold">
           {dupPlayers[currentNameIndex].name}
         </h1>
       </div>
 
       {/* Current Dare */}
-      <div className="dare-box bg-white h-48 w-2/5 mt-8 grid place-items-center px-14 text-center">
-        <span className="dare-text drop-shadow-md font-semibold text-3xl">
+      <div className="dare-box bg-white h-36 md:h-48 w-4/5 md:w-2/3 lg:w-1/2 mt-4 md:mt-6 grid place-items-center px-8 md:px-14 text-center">
+        <span className="dare-text drop-shadow-md font-semibold text-xl md:text-3xl">
           {currentDare.text}
         </span>
       </div>
 
       {/* Accept and Decline buttons */}
-      {!isAnimating() &&
-        <div className="flex justify-between 'w-2/5 sm:w-1/2 lg:w-2/3' px-10">
+      {!isAnimating() && (
+        <div className="flex justify-between w-4/5 md:w-2/3 lg:w-1/2">
           <div
             id="decline-button"
-            className="decline-button 'w-1/7 sm:w-2/7 md:w-3/7 lg:w-4/7' mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
+            className="decline-button mt-3 md:mt-6 h-14 md:h-20 lg:h-24 w-5/12 md:rounded-full flex place-content-center items-center"
             onClick={handleDecline}
           >
-            <span className="decline-text text-5xl font-extrabold tracking-widest">
+            <span className="decline-text hidden sm:inline-block text-3xl md:text-4xl font-extrabold tracking-widest">
               Decline
             </span>
+            <div className="decline-icon inline-block sm:hidden">
+              <img src={x1} className="h-8" />
+              <img src={x2} className="h-8" />
+            </div>
           </div>
           <div
             id="accept-button"
-            className="accept-button 'w-1/7 sm:w-2/7 md:w-3/7 lg:w-4/7' mt-12 h-24 px-12 rounded-full flex place-content-center items-center"
+            className="accept-button mt-3 md:mt-6 h-14 md:h-20 lg:h-24 w-5/12 rounded-full flex place-content-center items-center"
             onClick={handleAccept}
           >
-            <span className="accept-text text-5xl font-extrabold tracking-widest">
+            <span className="accept-text hidden sm:inline-block text-3xl md:text-4xl font-extrabold tracking-widest">
               Accept
             </span>
+            <div className="accept-icon inline-block sm:hidden">
+              <img src={check1} className="h-8" />
+              <img src={check2} className="h-8" />
+            </div>
           </div>
         </div>
-      }
+      )}
 
       {/* Pause screen */}
       {paused && (
