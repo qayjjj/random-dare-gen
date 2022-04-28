@@ -1,5 +1,13 @@
-.dare-box {
-    border-radius: 3.5rem;
+@media (min-width: 768px) {
+    .dare-box, #decline-button, #accept-button {
+        border-radius: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .dare-box, #decline-button, #accept-button {
+        border-radius: 1.5rem;
+    }
 }
 
 .dare-text {
@@ -29,6 +37,19 @@
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
     animation: bounce 1s ease infinite;
 }
+
+.accept-icon img:last-child, .decline-icon img:last-child{
+    display: none; 
+}
+
+.accept-button:hover .accept-icon img:last-child, .decline-button:hover .decline-icon img:last-child {
+    display: block;
+}
+
+.accept-button:hover .accept-icon img:first-child, .decline-button:hover .decline-icon img:first-child {
+    display: none;
+}
+
 
 .decline-button {
     background-color: rgb(	141, 41, 47, 0.7);
