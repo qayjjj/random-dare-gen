@@ -42,6 +42,6 @@ img {
 }
 
 .add-player-button {
-    background-color: rgba(172,77,218,0.5);
-    color: rgba(172,77,218,0.8)
+    background-color: rgba(172,77,218,0.9);
+    color: white;
 }

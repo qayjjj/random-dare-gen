@@ -9,7 +9,7 @@ function AppView() {
   const { startGame } = DareState.useContainer();
 
   return (
-    <div className="py-8 px-8">
+    <div className="py-4 px-4 sm:py-8 sm:px-8">
       <Header />
       {startGame ? <Dare /> : <Home />}
     </div>

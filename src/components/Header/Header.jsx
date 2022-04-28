@@ -12,7 +12,7 @@ function Header() {
   return (
     <div>
       <h1
-        className="header text-4xl font-semibold drop-shadow-lg cursor-pointer"
+        className="header text-2xl sm:text-3xl xl:text-4xl font-semibold drop-shadow-lg cursor-pointer"
         onClick={handleClick}
       >
         Random Dare Generator
