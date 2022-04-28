@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DareState from "../Dare/Dare.state.jsx";
-import arrow from "./arrow.png";
+// import arrow from "./arrow.png";
 import triangle from "./Triangle.png";
 import whiteTriangle from "./Triangle-white.png";
 import "./styles.css";
@@ -21,7 +21,7 @@ function Home() {
   };
 
   const checkInput = (input) => {
-    return input == "" || input.trim().length === 0;
+    return input === "" || input.trim().length === 0;
   };
 
   const handleInputChange = (e, index) => {
@@ -74,7 +74,7 @@ function Home() {
               className="input-field mt-2 w-full h-2 rounded-full drop-shadow-lg py-5 px-6 sm:px-8 relative"
               onChange={(e) => handleInputChange(e, index)}
             ></input>
-            {index != 0 && (
+            {index !== 0 && (
               <span
                 className="remove-button text-4xl rotate-45 absolute -right-8 top-1 cursor-pointer drop-shadow-lg"
                 onClick={() => handleRemovePlayer(index)}
