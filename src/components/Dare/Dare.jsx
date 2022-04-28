@@ -100,28 +100,28 @@ function Dare() {
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
 
-  const handleDecline = () => {
+  const changeScore = (completeDare) => {
     setPlayers(
       players.map((player) => {
         if (player.name === currentPlayer.name) {
-          player.score--;
+          if (completeDare) {
+            player.score++;
+          } else {
+            player.score--;
+          }
         }
         return player;
       })
     );
+  };
+
+  const handleDecline = () => {
+    changeScore(false);
     setAcceptDare(false);
     setPaused(true);
   };
 
   const handleAccept = () => {
-    setPlayers(
-      players.map((player) => {
-        if (player.name === currentPlayer.name) {
-          player.score++;
-        }
-        return player;
-      })
-    );
     setAcceptDare(true);
     setPaused(true);
   };
@@ -182,7 +182,11 @@ function Dare() {
 
       {/* Pause screen */}
       {paused && (
-        <Pause acceptDare={acceptDare} handleNextDare={handleNextDare} />
+        <Pause
+          acceptDare={acceptDare}
+          handleNextDare={handleNextDare}
+          changeScore={changeScore}
+        />
       )}
     </div>
   );

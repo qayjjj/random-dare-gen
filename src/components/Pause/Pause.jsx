@@ -3,10 +3,16 @@ import DareState from "../Dare/Dare.state.jsx";
 import Scores from "../Scores/Scores";
 import "./styles.css";
 
-function Pause({ acceptDare, handleNextDare }) {
+function Pause({ acceptDare, changeScore, handleNextDare }) {
   const [showScores, setShowScores] = useState(!acceptDare);
   const { setPaused } = DareState.useContainer();
-  const handleOnClick = () => {
+
+  const handleDoneQuitButtonClick = (done) => {
+    changeScore(done);
+    setShowScores(true);
+  };
+
+  const handleNextButtonClick = () => {
     setPaused(false);
     handleNextDare();
   };
@@ -20,7 +26,7 @@ function Pause({ acceptDare, handleNextDare }) {
           <Scores />
           <div
             className="success-button mt-8 w-64 h-24 rounded-full flex text-center justify-center items-center"
-            onClick={() => handleOnClick()}
+            onClick={() => handleNextButtonClick()}
           >
             <span className="success-text text-5xl font-extrabold tracking-widest">
               Next
@@ -31,13 +37,23 @@ function Pause({ acceptDare, handleNextDare }) {
         <div className="overlay-content w-screen flex flex-col items-center mt-60">
           {/* Complete dare & Done button */}
           <h1 className="text-6xl font-semibold">Complete your dare!</h1>
-          <div
-            className="success-button mt-12 w-64 h-24 rounded-full flex text-center justify-center items-center"
-            onClick={() => setShowScores(true)}
-          >
-            <span className="success-text text-5xl font-extrabold tracking-widest">
-              Done
-            </span>
+          <div className="flex">
+            <div
+              className="quit-button mt-12 w-60 h-24 flex text-center justify-center items-center"
+              onClick={() => handleDoneQuitButtonClick(false)}
+            >
+              <span className="quit-text text-4xl font-extrabold tracking-widest">
+                Quit
+              </span>
+            </div>
+            <div
+              className="success-button mt-12 w-60 h-24 flex text-center justify-center items-center ml-8"
+              onClick={() => handleDoneQuitButtonClick(true)}
+            >
+              <span className="success-text text-4xl font-extrabold tracking-widest">
+                Done
+              </span>
+            </div>
           </div>
         </div>
       )}
