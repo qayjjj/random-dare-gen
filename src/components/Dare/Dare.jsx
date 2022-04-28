@@ -18,7 +18,7 @@ function Dare() {
   // Animation for flashing names
   // -------------------------------------------------------------------------
 
-  const tickIntervals = [
+  const nameTickerIntervals = [
     21,
     13,
     8,
@@ -77,11 +77,11 @@ function Dare() {
     const player = dupPlayers[index];
 
     setCurrentNameIndex(
-      (playersLeft - 1
-        - (nameTickerIntervals.length % dupPlayers.length)  // Animation's starting index
-        + dupPlayers.length                                 // In case subtraction yields negative
-      )
-      % dupPlayers.length                                   // In case sum exceeds length
+      (playersLeft -
+        1 -
+        (nameTickerIntervals.length % dupPlayers.length) + // Animation's starting index
+        dupPlayers.length) % // In case subtraction yields negative
+        dupPlayers.length // In case sum exceeds length
     );
 
     // Swap selected player to the end of the array. Decrement playersLeft
