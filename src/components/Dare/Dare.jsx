@@ -6,27 +6,31 @@ import "./styles.css";
 function Dare() {
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
   
-  // An array of duplicate players to prevent predictable player cycle
+  // An array of duplicate players to prevent predictable player cycle. Also assists animation
   const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
   const dares = require("./Dares.json");
 
-  const tickIntervals = [
+  // -------------------------------------------------------------------------
+  // Animation for flashing names
+  // -------------------------------------------------------------------------
+
+  const nameTickerIntervals = [
     21, 13, 8, 5, 3, 2,                 // The ticker speeding up...
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // Ticking...
     2, 3, 5, 8, 13, 21, 34              // And slowing down.
   ];
-  const tickMultiplier = 30; // Multiplied with intervals to get length in ms
+  const itvMultiplier = 20; // Multiplied with intervals to get length in ms
   const [tickCount, setTickCount] = useState(0);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
 
-  const isAnimating = () => tickCount < tickIntervals.length;
+  const isAnimating = () => tickCount < nameTickerIntervals.length;
 
   useEffect(() => {
     if (isAnimating()) {
       const interval = setInterval(() => {
         setTickCount(tickCount + 1);
         setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
-      }, tickIntervals[tickCount] * tickMultiplier);
+      }, nameTickerIntervals[tickCount] * itvMultiplier);
 
       return () => {
         clearInterval(interval);
@@ -34,22 +38,29 @@ function Dare() {
     } else return;
   }, [tickCount, currentNameIndex, dupPlayers]);
 
+  // -------------------------------------------------------------------------
+  // Randomizers for players and dares
+  // -------------------------------------------------------------------------
+
   const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
   const [acceptDare, setAcceptDare] = useState(false);
 
-  // Choose a random player from the tempPlayer array
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * playersLeft);
     const player = dupPlayers[index];
+
     setCurrentNameIndex(
-      (playersLeft +
-        dupPlayers.length -
-        (tickIntervals.length % dupPlayers.length) -
-      1) %
-      dupPlayers.length
+      (playersLeft - 1
+        - (nameTickerIntervals.length % dupPlayers.length)  // Animation's starting index
+        + dupPlayers.length                                 // In case subtraction yields negative
+      )
+      % dupPlayers.length                                   // In case sum exceeds length
     );
 
+    // Swap selected player to the end of the array. Decrement playersLeft
+    // Selected player is omitted from randomizer pool for next iterations
+    // This prevents name repetition while maintaining dupPlayer's contents for animation
     dupPlayers[index] = dupPlayers[playersLeft - 1];
     dupPlayers[playersLeft - 1] = player;
     setPlayersLeft(playersLeft - 1);
@@ -58,11 +69,11 @@ function Dare() {
     return player;
   };
 
-  // Choose a random dare from the dares array
   const getRandomDare = () => {
     const index = Math.floor(Math.random() * daresLeft);
     const dare = dares[index];
 
+    // Similar logic with choosing the player
     dares[index] = dares[daresLeft - 1];
     dares[daresLeft - 1] = dare;
     setDaresLeft(daresLeft - 1);
@@ -70,6 +81,10 @@ function Dare() {
     if (daresLeft === 1) setDaresLeft(dares.length);
     return dare;
   };
+
+  // -------------------------------------------------------------------------
+  // Event handlers for buttons
+  // -------------------------------------------------------------------------
 
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
@@ -105,6 +120,10 @@ function Dare() {
     setCurrentDare(getRandomDare());
     setTickCount(0);
   };
+
+  // -------------------------------------------------------------------------
+  // Render of Dare component
+  // -------------------------------------------------------------------------
 
   return (
     <div className="flex flex-col items-center mt-32">
