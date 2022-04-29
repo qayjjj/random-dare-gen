@@ -25,18 +25,16 @@ function Dare() {
     5,
     3,
     2, // The ticker speeding up...
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1, // Ticking...
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2, // Ticking...
     2,
     3,
     5,
@@ -179,8 +177,8 @@ function Dare() {
               Decline
             </span>
             <div className="decline-icon inline-block sm:hidden">
-              <img src={x1} className="h-8" />
-              <img src={x2} className="h-8" />
+              <img src={x1} className="h-8" alt="x1"/>
+              <img src={x2} className="h-8" alt="x2"/>
             </div>
           </div>
           <div
@@ -192,8 +190,8 @@ function Dare() {
               Accept
             </span>
             <div className="accept-icon inline-block sm:hidden">
-              <img src={check1} className="h-8" />
-              <img src={check2} className="h-8" />
+              <img src={check1} className="h-8" alt="check1"/>
+              <img src={check2} className="h-8" alt="check2"/>
             </div>
           </div>
         </div>

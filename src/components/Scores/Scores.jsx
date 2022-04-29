@@ -28,7 +28,7 @@ function Scores() {
                   {player.name}
                 </span>
                 {index === 0 && (
-                  <img className="ml-4 inline w-4 sm:w-6" src={star} />
+                  <img className="ml-4 inline w-4 sm:w-6" src={star} alt="star"/>
                 )}
               </td>
               <td className="text-right py-2">
