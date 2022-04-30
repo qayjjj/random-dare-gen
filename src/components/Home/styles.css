@@ -25,7 +25,7 @@ img {
 }
 
 .start-button-clickable > .arrow-pic {
-  animation: drag 1s infinite;
+  animation: drag 1s ease infinite;
 }
 
 @keyframes drag { 

@@ -1,0 +1,11 @@
+.star-pic {
+  animation-name: spin;
+  animation-delay: 0.25s; 
+  animation-duration: 1.25s; 
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes spin {
+  100% {transform: rotate(72deg);}
+}

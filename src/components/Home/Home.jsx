@@ -48,7 +48,6 @@ function Home() {
 
   const handleStartGame = () => {
     let players = [];
-    console.log(names);
     names.map((name) => {
       if (name !== "" && name.trim() !== "") {
         players.push({ name: name.trim(), score: 0 });
@@ -57,7 +56,6 @@ function Home() {
     });
     setStartGame(true);
     setPlayers(players);
-    console.log(players);
   };
 
   return (

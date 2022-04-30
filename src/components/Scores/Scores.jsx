@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import DareState from "../Dare/Dare.state.jsx";
 import star from "./star.png";
+import "./styles.css";
 
 function Scores() {
   const { players } = DareState.useContainer();
@@ -28,7 +29,7 @@ function Scores() {
                   {player.name}
                 </span>
                 {index === 0 && (
-                  <img className="ml-4 inline w-4 sm:w-6" src={star} alt="star"/>
+                  <img className="star-pic ml-4 inline w-4 sm:w-6" src={star} alt="star"/>
                 )}
               </td>
               <td className="text-right py-2">
