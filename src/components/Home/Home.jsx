@@ -53,6 +53,7 @@ function Home() {
       if (name !== "" && name.trim() !== "") {
         players.push({ name: name.trim(), score: 0 });
       }
+      return null;
     });
     setStartGame(true);
     setPlayers(players);

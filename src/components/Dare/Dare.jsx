@@ -53,43 +53,36 @@ function Dare() {
     if (isAnimating()) {
       const interval = setInterval(() => {
         setTickCount(tickCount + 1);
-        setCurrentNameIndex((currentNameIndex + 1) % dupPlayers.length);
+        setCurrentNameIndex((currentNameIndex + 1) % players.length);
       }, nameTickerIntervals[tickCount] * itvMultiplier);
 
       return () => {
         clearInterval(interval);
       };
     } else return;
-  }, [tickCount, currentNameIndex, dupPlayers]);
+  }, [tickCount, currentNameIndex, players]);
 
   // -------------------------------------------------------------------------
   // Randomizers for players and dares
   // -------------------------------------------------------------------------
 
-  const [playersLeft, setPlayersLeft] = useState(dupPlayers.length);
   const [daresLeft, setDaresLeft] = useState(dares.length);
   const [acceptDare, setAcceptDare] = useState(false);
 
   const getRandomPlayer = () => {
-    const index = Math.floor(Math.random() * playersLeft);
+    const index = Math.floor(Math.random() * dupPlayers.length);
     const player = dupPlayers[index];
-
-    setCurrentNameIndex(
-      (playersLeft -
-        1 -
-        (nameTickerIntervals.length % dupPlayers.length) + // Animation's starting index
-        dupPlayers.length) % // In case subtraction yields negative
-        dupPlayers.length // In case sum exceeds length
-    );
+    
+    setStartingNameIndex(player);
 
     // Swap selected player to the end of the array. Decrement playersLeft
     // Selected player is omitted from randomizer pool for next iterations
     // This prevents name repetition while maintaining dupPlayer's contents for animation
-    dupPlayers[index] = dupPlayers[playersLeft - 1];
-    dupPlayers[playersLeft - 1] = player;
-    setPlayersLeft(playersLeft - 1);
+    const temp = [...dupPlayers];
+    temp.splice(index, 1);
+    setDupPlayers(temp);
 
-    if (playersLeft === 1) setPlayersLeft(dupPlayers.length);
+    if (temp.length === 0) setDupPlayers([...players].concat(players));
     return player;
   };
 
@@ -105,6 +98,19 @@ function Dare() {
     if (daresLeft === 1) setDaresLeft(dares.length);
     return dare;
   };
+
+  const setStartingNameIndex = (chosenPlayer) => {
+    for (let i = 0; i < players.length; i++) {
+      if (chosenPlayer.name === players[i].name) {
+        setCurrentNameIndex(
+          (i -
+          (nameTickerIntervals.length % players.length) + // Animation's starting index
+          players.length) % // In case subtraction yields negative
+          players.length // In case sum exceeds length
+        )
+      }
+    }
+  }
 
   // -------------------------------------------------------------------------
   // Event handlers for buttons
@@ -154,7 +160,7 @@ function Dare() {
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
         <h1 className="text-3xl md:text-4xl drop-shadow-lg font-semibold">
-          {dupPlayers[currentNameIndex].name}
+          {players[currentNameIndex].name}
         </h1>
       </div>
 
