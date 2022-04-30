@@ -13,6 +13,7 @@ function Dare() {
 
   // An array players duplicated to prevent predictable player cycle
   const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
+  const [daresLeft, setDaresLeft] = useState([...dares]);
 
   // -------------------------------------------------------------------------
   // Animation for flashing names
@@ -47,8 +48,11 @@ function Dare() {
   const [tickCount, setTickCount] = useState(0);
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
 
-  const isAnimating = () => tickCount < nameTickerIntervals.length;
+  const isAnimating = () => players.length > 1 && tickCount < nameTickerIntervals.length;
 
+  /**
+   * Animates through the names in the players array, ending on currentPlayer
+   */
   useEffect(() => {
     if (isAnimating()) {
       const interval = setInterval(() => {
@@ -66,8 +70,6 @@ function Dare() {
   // Randomizers for players and dares
   // -------------------------------------------------------------------------
 
-  const [daresLeft, setDaresLeft] = useState(dares.length);
-
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * dupPlayers.length);
     const player = dupPlayers[index];
@@ -83,14 +85,14 @@ function Dare() {
   };
 
   const getRandomDare = () => {
-    const index = Math.floor(Math.random() * daresLeft);
-    const dare = dares[index];
+    const index = Math.floor(Math.random() * daresLeft.length);
+    const dare = daresLeft[index];
 
-    dares[index] = dares[daresLeft - 1];
-    dares[daresLeft - 1] = dare;
-    setDaresLeft(daresLeft - 1);
+    const remainingDares = [...daresLeft];
+    remainingDares.splice(index, 1);
+    setDaresLeft(remainingDares);
 
-    if (daresLeft === 1) setDaresLeft(dares.length);
+    if (remainingDares.length === 0) setDaresLeft([...dares]);
     return dare;
   };
 
@@ -118,6 +120,7 @@ function Dare() {
 
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
+
   const [acceptDare, setAcceptDare] = useState(false);
 
   const changeScore = (completeDare) => {
