@@ -9,10 +9,10 @@ import "./styles.css";
 
 function Dare() {
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
-
-  // An array of duplicate players to prevent predictable player cycle. Also assists animation
-  const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
   const dares = require("./Dares.json");
+
+  // An array players duplicated to prevent predictable player cycle
+  const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
 
   // -------------------------------------------------------------------------
   // Animation for flashing names
@@ -45,7 +45,7 @@ function Dare() {
   ];
   const itvMultiplier = 20; // Multiplied with intervals to get length in ms
   const [tickCount, setTickCount] = useState(0);
-  const [currentNameIndex, setCurrentNameIndex] = useState(0);
+  const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
 
   const isAnimating = () => tickCount < nameTickerIntervals.length;
 
@@ -53,36 +53,32 @@ function Dare() {
     if (isAnimating()) {
       const interval = setInterval(() => {
         setTickCount(tickCount + 1);
-        setCurrentNameIndex((currentNameIndex + 1) % players.length);
+        setCurrentAnimationIndex((currentAnimationIndex + 1) % players.length);
       }, nameTickerIntervals[tickCount] * itvMultiplier);
 
       return () => {
         clearInterval(interval);
       };
     } else return;
-  }, [tickCount, currentNameIndex, players]);
+  }, [tickCount, currentAnimationIndex, players]);
 
   // -------------------------------------------------------------------------
   // Randomizers for players and dares
   // -------------------------------------------------------------------------
 
   const [daresLeft, setDaresLeft] = useState(dares.length);
-  const [acceptDare, setAcceptDare] = useState(false);
 
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * dupPlayers.length);
     const player = dupPlayers[index];
     
-    setStartingNameIndex(player);
+    setStartingAnimationIndex(player);
 
-    // Swap selected player to the end of the array. Decrement playersLeft
-    // Selected player is omitted from randomizer pool for next iterations
-    // This prevents name repetition while maintaining dupPlayer's contents for animation
-    const temp = [...dupPlayers];
-    temp.splice(index, 1);
-    setDupPlayers(temp);
+    const remainingPlayers = [...dupPlayers];
+    remainingPlayers.splice(index, 1);
+    setDupPlayers(remainingPlayers);
 
-    if (temp.length === 0) setDupPlayers([...players].concat(players));
+    if (remainingPlayers.length === 0) setDupPlayers([...players].concat(players));
     return player;
   };
 
@@ -90,7 +86,6 @@ function Dare() {
     const index = Math.floor(Math.random() * daresLeft);
     const dare = dares[index];
 
-    // Similar logic with choosing the player
     dares[index] = dares[daresLeft - 1];
     dares[daresLeft - 1] = dare;
     setDaresLeft(daresLeft - 1);
@@ -99,10 +94,15 @@ function Dare() {
     return dare;
   };
 
-  const setStartingNameIndex = (chosenPlayer) => {
+  /**
+   * Given the player, calculates the index the name animation should start from
+   * 
+   * @param chosenPlayer the player the animation will end on
+   */
+  const setStartingAnimationIndex = (chosenPlayer) => {
     for (let i = 0; i < players.length; i++) {
       if (chosenPlayer.name === players[i].name) {
-        setCurrentNameIndex(
+        setCurrentAnimationIndex(
           (i -
           (nameTickerIntervals.length % players.length) + // Animation's starting index
           players.length) % // In case subtraction yields negative
@@ -113,11 +113,12 @@ function Dare() {
   }
 
   // -------------------------------------------------------------------------
-  // Event handlers for buttons
+  // Event handlers for accept and decline buttons
   // -------------------------------------------------------------------------
 
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
   const [currentDare, setCurrentDare] = useState(() => getRandomDare());
+  const [acceptDare, setAcceptDare] = useState(false);
 
   const changeScore = (completeDare) => {
     setPlayers(
@@ -152,7 +153,7 @@ function Dare() {
   };
 
   // -------------------------------------------------------------------------
-  // Render of Dare component
+  // Render method of Dare component
   // -------------------------------------------------------------------------
 
   return (
@@ -160,7 +161,7 @@ function Dare() {
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
         <h1 className="text-3xl md:text-4xl drop-shadow-lg font-semibold">
-          {players[currentNameIndex].name}
+          {players[currentAnimationIndex].name}
         </h1>
       </div>
 
