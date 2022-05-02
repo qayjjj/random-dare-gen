@@ -20,7 +20,7 @@ function Dare() {
   // -------------------------------------------------------------------------
 
   const nameTickerIntervals = [
-    21,
+    34,
     13,
     8,
     5,
@@ -44,7 +44,7 @@ function Dare() {
     21,
     34, // And slowing down.
   ];
-  const itvMultiplier = 20; // Multiplied with intervals to get length in ms
+  const itvMultiplier = 25; // Multiplied with intervals to get length in ms
   const [tickCount, setTickCount] = useState(0);
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
 
@@ -170,9 +170,11 @@ function Dare() {
 
       {/* Current Dare */}
       <div className="dare-box bg-white h-36 md:h-48 w-4/5 md:w-2/3 lg:w-1/2 mt-4 md:mt-6 grid place-items-center px-8 md:px-14 text-center">
-        <span className="dare-text drop-shadow-md font-semibold text-xl md:text-3xl">
-          {currentDare.text}
-        </span>
+        <div className={tickCount === 0 ? "new-dare" : null}>
+          <span className="dare-text drop-shadow-md font-semibold text-xl md:text-3xl">
+            {currentDare.text}
+          </span>
+        </div>
       </div>
 
       {/* Accept and Decline buttons */}

@@ -15,10 +15,21 @@
 }
 
 @keyframes bounce {
-  30% {transform: translateY(-8px);}
-  50% {transform: translateY(0);} 
-  60% {transform: translateY(-3px);}
-  100% {transform: translateY(0);}
+    30% {transform: translateY(-8px);}
+    50% {transform: translateY(0);} 
+    60% {transform: translateY(-3px);}
+    100% {transform: translateY(0);}
+}
+
+@keyframes fade-in {
+    0% {
+      transform: scale(1.5, 1.5);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1, 1);
+      opacity: 1;
+    }
 }
 
 .accept-button{
@@ -70,4 +81,8 @@
 
 .animation-name-selected {
     animation: bounce 1s ease;
+}
+
+.new-dare {
+    animation: fade-in 1s;
 }
