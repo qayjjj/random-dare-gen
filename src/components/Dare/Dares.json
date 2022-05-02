@@ -1,102 +1,62 @@
 [
     {
-        "text": "Chug a whole bottle of water",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Chug a whole bottle of water"
     },
     {
-        "text": "Sing a song together",
-        "playerNum": 2,
-        "filter": "Family"
+        "text": "Sing a song"
     },
     {
-        "text": "Tell us about your first crush",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Tell us about your first crush"
     },
     {
-        "text": "Call your parent(s) and say you love them",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Call your parent(s) and say you love them"
     },
     {
-        "text": "Make a frog sound",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Make a frog sound"
     },
     {
-        "text": "Spin until you are dizzy",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Spin until you are dizzy"
     },
     {
-        "text": "Do a lap around the building",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Do a lap around the building"
     },
     {
-        "text": "Attempt a handstand",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Attempt a handstand"
     },
     {
-        "text": "Do 50 pushups",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Do 50 pushups"
     },
     {
-        "text": "Get up from lying on your stomach with your hands behind your back",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Get up from lying on your stomach with your hands behind your back"
     },
     {
-        "text": "Go on instagram live for 10 minutes",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Go on instagram live for 10 minutes"
     },
     {
-        "text": "Text your most recent ex",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Text your most recent ex"
     },
     {
-        "text": "Burp the alphabet",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Burp the alphabet"
     },
     {
-        "text": "Talk without closing your mouth",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Talk without closing your mouth"
     },
     {
-        "text": "Prank call someone",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Prank call someone"
     },
     {
-        "text": "Eat a whole piece of paper",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Eat a whole piece of paper"
     },
     {
-        "text": "Touch your elbow to your toe",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Touch your elbow to your toe"
     },
     {
-        "text": "Lick the bottom of your shoe",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Lick the bottom of your shoe"
     },
     {
-        "text": "Kneel for an hour",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Kneel for an hour"
     },
     {
-        "text": "Give yourself a tattoo with a marker",
-        "playerNum": 1,
-        "filter": "Family"
+        "text": "Give yourself a tattoo with a marker"
     }
 ]
