@@ -8,12 +8,16 @@ import x2 from "./x2.svg";
 import "./styles.css";
 
 function Dare() {
+  // Original player array. Used for changing / showing scores
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
+  // Modified array with additional "everyone" entry. Used for animations
+  const modPlayers = [...players];
+  modPlayers.push({ name: "Everyone", score: 0});
+  // Duplicated modPlayers entries. Used in randomizer to prevent predictable player cycles
+  const [dupPlayers, setDupPlayers] = useState([...modPlayers].concat(modPlayers));
+  
   const dares = require("./Dares.json");
-
-  // An array players duplicated to prevent predictable player cycle
-  const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
-  const [daresLeft, setDaresLeft] = useState([...dares]);
+  const [unusedDares, setUnusedDares] = useState([...dares]);
 
   // -------------------------------------------------------------------------
   // Animation for flashing names
@@ -58,14 +62,14 @@ function Dare() {
     if (isAnimating()) {
       const interval = setInterval(() => {
         setTickCount(tickCount + 1);
-        setCurrentAnimationIndex((currentAnimationIndex + 1) % players.length);
+        setCurrentAnimationIndex((currentAnimationIndex + 1) % modPlayers.length);
       }, nameTickerIntervals[tickCount] * itvMultiplier);
 
       return () => {
         clearInterval(interval);
       };
     } else return;
-  }, [tickCount, currentAnimationIndex, players]);
+  });
 
   // -------------------------------------------------------------------------
   // Randomizers for players and dares
@@ -82,19 +86,19 @@ function Dare() {
     setDupPlayers(remainingPlayers);
 
     if (remainingPlayers.length === 0)
-      setDupPlayers([...players].concat(players));
+      setDupPlayers([...modPlayers].concat(modPlayers));
     return player;
   };
 
   const getRandomDare = () => {
-    const index = Math.floor(Math.random() * daresLeft.length);
-    const dare = daresLeft[index];
+    const index = Math.floor(Math.random() * unusedDares.length);
+    const dare = unusedDares[index];
 
-    const remainingDares = [...daresLeft];
+    const remainingDares = [...unusedDares];
     remainingDares.splice(index, 1);
-    setDaresLeft(remainingDares);
+    setUnusedDares(remainingDares);
 
-    if (remainingDares.length === 0) setDaresLeft([...dares]);
+    if (remainingDares.length === 0) setUnusedDares([...dares]);
     return dare;
   };
 
@@ -104,13 +108,13 @@ function Dare() {
    * @param chosenPlayer the player the animation will end on
    */
   const setStartingAnimationIndex = (chosenPlayer) => {
-    for (let i = 0; i < players.length; i++) {
-      if (chosenPlayer.name === players[i].name) {
+    for (let i = 0; i < modPlayers.length; i++) {
+      if (chosenPlayer.name === modPlayers[i].name) {
         setCurrentAnimationIndex(
           (i -
-            (nameTickerIntervals.length % players.length) + // Animation's starting index
-            players.length) % // In case subtraction yields negative
-            players.length // In case sum exceeds length
+            (nameTickerIntervals.length % modPlayers.length) + // Animation's starting index
+            modPlayers.length) % // In case subtraction yields negative
+            modPlayers.length // In case sum exceeds length
         );
       }
     }
@@ -128,7 +132,7 @@ function Dare() {
   const changeScore = (completeDare) => {
     setPlayers(
       players.map((player) => {
-        if (player.name === currentPlayer.name) {
+        if (currentPlayer.name === "Everyone" || player.name === currentPlayer.name) {
           if (completeDare) {
             player.score++;
           } else {
@@ -166,7 +170,7 @@ function Dare() {
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
         <h1 className="text-3xl md:text-4xl drop-shadow-lg font-semibold">
-          {players[currentAnimationIndex].name}
+          {modPlayers[currentAnimationIndex].name}
         </h1>
       </div>
 
