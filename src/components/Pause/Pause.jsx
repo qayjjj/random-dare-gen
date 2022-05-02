@@ -25,7 +25,7 @@ function Pause({ acceptDare, changeScore, handleNextDare }) {
         <div className="overlay-content w-screen flex flex-col items-center mt-60">
           <Scores />
           <div
-            className="success-button mt-4 xl:mt-8 w-32 sm:w-48 xl:w-52 h-10 sm:h-14 xl:h-20 flex text-center justify-center items-center"
+            className="success-button mt-14 w-32 sm:w-48 xl:w-52 h-10 sm:h-14 xl:h-20 flex text-center justify-center items-center"
             onClick={() => handleNextButtonClick()}
           >
             <span className="success-text text-2xl sm:text-3xl xl:text-4xl font-extrabold tracking-widest">

@@ -11,37 +11,40 @@ function Scores() {
   });
 
   return (
-    <table className="text-left w-1/2 sm:w-2/5 lg:w-1/3 -mt-40 sm:-mt-32 xl:-mt-28">
-      <tbody>
-        <tr>
-          <th
-            colSpan={2}
-            className="text-center text-2xl sm:text-3xl xl:text-4xl font-semibold"
-          >
-            Scores
-          </th>
-        </tr>
-        {sortedPlayers.map((player, index) => {
-          return (
-            <tr key={player.name}>
-              <td className="py-2 flex items-center">
-                <span className="text-xl sm:text-2xl xl:text-3xl font-semibold">
-                  {player.name}
-                </span>
-                {index === 0 && (
-                  <img className="star-pic ml-4 inline w-4 sm:w-6" src={star} alt="star"/>
-                )}
-              </td>
-              <td className="text-right py-2">
-                <span className="text-xl sm:text-2xl xl:text-3xl">
-                  {player.score}
-                </span>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className="w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:px-6 -mt-40 sm:-mt-32 xl:-mt-26 h-4/5 sm:h-3/5 md:h-3/4">
+      <h1 className="text-center text-2xl sm:text-3xl xl:text-4xl font-semibold">
+        Scores
+      </h1>
+      <div className="scores-container w-full overflow-y-scroll h-full mt-2 px-5">
+        <table className="text-left w-full">
+          <tbody className="">
+            {sortedPlayers.map((player, index) => {
+              return (
+                <tr key={player.name}>
+                  <td className="py-2 flex items-center">
+                    <span className="text-xl sm:text-2xl xl:text-3xl font-semibold">
+                      {player.name}
+                    </span>
+                    {index === 0 && (
+                      <img
+                        className="star-pic ml-4 inline w-4 sm:w-6"
+                        src={star}
+                        alt="star"
+                      />
+                    )}
+                  </td>
+                  <td className="text-right py-2">
+                    <span className="text-xl sm:text-2xl xl:text-3xl">
+                      {player.score}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
