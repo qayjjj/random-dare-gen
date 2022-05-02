@@ -48,7 +48,8 @@ function Dare() {
   const [tickCount, setTickCount] = useState(0);
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
 
-  const isAnimating = () => players.length > 1 && tickCount < nameTickerIntervals.length;
+  const isAnimating = () =>
+    players.length > 1 && tickCount < nameTickerIntervals.length;
 
   /**
    * Animates through the names in the players array, ending on currentPlayer
@@ -73,14 +74,15 @@ function Dare() {
   const getRandomPlayer = () => {
     const index = Math.floor(Math.random() * dupPlayers.length);
     const player = dupPlayers[index];
-    
+
     setStartingAnimationIndex(player);
 
     const remainingPlayers = [...dupPlayers];
     remainingPlayers.splice(index, 1);
     setDupPlayers(remainingPlayers);
 
-    if (remainingPlayers.length === 0) setDupPlayers([...players].concat(players));
+    if (remainingPlayers.length === 0)
+      setDupPlayers([...players].concat(players));
     return player;
   };
 
@@ -98,7 +100,7 @@ function Dare() {
 
   /**
    * Given the player, calculates the index the name animation should start from
-   * 
+   *
    * @param chosenPlayer the player the animation will end on
    */
   const setStartingAnimationIndex = (chosenPlayer) => {
@@ -106,13 +108,13 @@ function Dare() {
       if (chosenPlayer.name === players[i].name) {
         setCurrentAnimationIndex(
           (i -
-          (nameTickerIntervals.length % players.length) + // Animation's starting index
-          players.length) % // In case subtraction yields negative
-          players.length // In case sum exceeds length
-        )
+            (nameTickerIntervals.length % players.length) + // Animation's starting index
+            players.length) % // In case subtraction yields negative
+            players.length // In case sum exceeds length
+        );
       }
     }
-  }
+  };
 
   // -------------------------------------------------------------------------
   // Event handlers for accept and decline buttons
@@ -160,7 +162,7 @@ function Dare() {
   // -------------------------------------------------------------------------
 
   return (
-    <div className="flex flex-col items-center mt-12 md:mt-16 lg:mt-24">
+    <div className="flex flex-col items-center mt-12 md:mt-16 lg:mt-24 xl:mt-32">
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
         <h1 className="text-3xl md:text-4xl drop-shadow-lg font-semibold">
@@ -189,8 +191,8 @@ function Dare() {
               Decline
             </span>
             <div className="decline-icon inline-block sm:hidden">
-              <img src={x1} className="h-8" alt="x1"/>
-              <img src={x2} className="h-8" alt="x2"/>
+              <img src={x1} className="h-8" alt="x1" />
+              <img src={x2} className="h-8" alt="x2" />
             </div>
           </div>
           <div
@@ -202,8 +204,8 @@ function Dare() {
               Accept
             </span>
             <div className="accept-icon inline-block sm:hidden">
-              <img src={check1} className="h-8" alt="check1"/>
-              <img src={check2} className="h-8" alt="check2"/>
+              <img src={check1} className="h-8" alt="check1" />
+              <img src={check2} className="h-8" alt="check2" />
             </div>
           </div>
         </div>

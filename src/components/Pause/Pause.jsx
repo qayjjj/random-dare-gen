@@ -34,7 +34,7 @@ function Pause({ acceptDare, changeScore, handleNextDare }) {
           </div>
         </div>
       ) : (
-        <div className="overlay-content w-screen flex flex-col items-center mt-36 sm:mt-40 lg:mt-48">
+        <div className="overlay-content w-screen flex flex-col items-center mt-36 sm:mt-40 lg:mt-48 lg:mt-64">
           {/* Complete dare & Done button */}
           <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold">
             Complete your dare!
