@@ -1,62 +1,82 @@
 [
     {
-        "text": "Chug a whole bottle of water"
+        "text": "Chug a whole bottle of water",
+        "supportMultiplayer": true
     },
     {
-        "text": "Sing a song"
+        "text": "Sing a song",
+        "supportMultiplayer": true
     },
     {
-        "text": "Tell us about your first crush"
+        "text": "Tell everyone about your first crush",
+        "supportMultiplayer": false
     },
     {
-        "text": "Call your parent(s) and say you love them"
+        "text": "Call your parent(s) and say you love them",
+        "supportMultiplayer": false
     },
     {
-        "text": "Make a frog sound"
+        "text": "Make a frog sound",
+        "supportMultiplayer": true
     },
     {
-        "text": "Spin until you are dizzy"
+        "text": "Spin until you are dizzy",
+        "supportMultiplayer": true
     },
     {
-        "text": "Do a lap around the building"
+        "text": "Do a lap around the building",
+        "supportMultiplayer": true
     },
     {
-        "text": "Attempt a handstand"
+        "text": "Attempt a handstand",
+        "supportMultiplayer": true
     },
     {
-        "text": "Do 50 pushups"
+        "text": "Do 20 pushups",
+        "supportMultiplayer": true
     },
     {
-        "text": "Get up from lying on your stomach with your hands behind your back"
+        "text": "Get up from lying on your stomach with your hands behind your back",
+        "supportMultiplayer": true
     },
     {
-        "text": "Go on instagram live for 10 minutes"
+        "text": "Go on instagram live for 5 minutes",
+        "supportMultiplayer": false
     },
     {
-        "text": "Text your most recent ex"
+        "text": "Text your most recent ex",
+        "supportMultiplayer": true
     },
     {
-        "text": "Burp the alphabet"
+        "text": "Burp the alphabet",
+        "supportMultiplayer": false
     },
     {
-        "text": "Talk without closing your mouth"
+        "text": "Talk without closing your mouth for 5 minutes",
+        "supportMultiplayer": true
     },
     {
-        "text": "Prank call someone"
+        "text": "Prank call someone",
+        "supportMultiplayer": false
     },
     {
-        "text": "Eat a whole piece of paper"
+        "text": "Eat a whole piece of paper",
+        "supportMultiplayer": true
     },
     {
-        "text": "Touch your elbow to your toe"
+        "text": "Touch your elbow to your toe",
+        "supportMultiplayer": true
     },
     {
-        "text": "Lick the bottom of your shoe"
+        "text": "Lick the bottom of your shoe",
+        "supportMultiplayer": true
     },
     {
-        "text": "Kneel for an hour"
+        "text": "Kneel for 10 minutes",
+        "supportMultiplayer": true
     },
     {
-        "text": "Give yourself a tattoo with a marker"
+        "text": "Give yourself a tattoo with a marker",
+        "supportMultiplayer": false
     }
 ]
