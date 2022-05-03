@@ -12,7 +12,7 @@ function Dare() {
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
   // Modified array with additional "everyone" entry. Used for animations
   const modPlayers = [...players];
-  modPlayers.push({ name: "Everyone", score: 0});
+  if (players.length !== 1) modPlayers.push({ name: "Everyone", score: 0});
   // Duplicated modPlayers entries. Used in randomizer to prevent predictable player cycles
   const [dupPlayers, setDupPlayers] = useState([...modPlayers].concat(modPlayers));
   

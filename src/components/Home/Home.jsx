@@ -73,7 +73,7 @@ function Home() {
               placeholder="Enter player's name"
               className="input-field mt-2 w-full h-2 rounded-full drop-shadow-lg py-5 px-6 sm:px-8 relative"
               onChange={(e) => handleInputChange(e, index)}
-              autoFocus={index == names.length - 1}
+              autoFocus={index === names.length - 1}
             ></input>
             {index !== 0 && (
               <span

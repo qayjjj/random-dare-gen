@@ -43,5 +43,9 @@ img {
 
 .add-player-button {
     background-color: rgba(172,77,218,0.9);
+    color: rgba(191,172,200, 0.7);
+}
+
+.add-player-button:hover {
     color: white;
 }
