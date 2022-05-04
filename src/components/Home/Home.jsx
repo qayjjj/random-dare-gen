@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import DareState from "../Dare/Dare.state.jsx";
-// import arrow from "./arrow.png";
 import triangle from "./Triangle.png";
 import whiteTriangle from "./Triangle-white.png";
 import "./styles.css";
@@ -54,6 +53,8 @@ function Home() {
       }
       return null;
     });
+    // An "Everyone" entry for interactions!  
+    players.push({ name: "Everyone", isEveryone: true });
     setStartGame(true);
     setPlayers(players);
   };

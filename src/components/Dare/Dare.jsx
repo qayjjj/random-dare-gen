@@ -8,13 +8,10 @@ import x2 from "./x2.svg";
 import "./styles.css";
 
 function Dare() {
-  // Original player array. Used for changing / showing scores
+  // Original player array. Used for changing / showing scores and name animations
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
-  // Modified array with additional "everyone" entry. Used for animations
-  const modPlayers = [...players];
-  if (players.length !== 1) modPlayers.push({ name: "Everyone", isEveryone: true });
-  // Duplicated modPlayers entries. Used in randomizer to prevent predictable player cycles
-  const [dupPlayers, setDupPlayers] = useState([...modPlayers].concat(modPlayers));
+  // Duplicated players' entries. Used in randomizer to prevent predictable player cycles
+  const [dupPlayers, setDupPlayers] = useState([...players].concat(players));
 
   const dares = require("./Dares.json");
   const [unusedDares, setUnusedDares] = useState([...dares]);
@@ -68,13 +65,12 @@ function Dare() {
   useEffect(() => {
     if (isAnimating()) {
       const interval = setInterval(() => {
-        setCurrentAnimationIndex((currentAnimationIndex + 1) % modPlayers.length);
+        setCurrentAnimationIndex((currentAnimationIndex + 1) % players.length);
         setTickCount(tickCount + 1);
       }, nameTickerIntervals[tickCount] * itvMultiplier);
 
-      return () => {
-        clearInterval(interval);
-      };
+      return () => clearInterval(interval);
+      
     } else return;
   });
 
@@ -93,7 +89,7 @@ function Dare() {
     setDupPlayers(remainingPlayers);
 
     if (remainingPlayers.length === 0)
-      setDupPlayers([...modPlayers].concat(modPlayers));
+      setDupPlayers([...players].concat(players));
     return player;
   };
 
@@ -129,15 +125,14 @@ function Dare() {
    * @param chosenPlayer the player the animation will end on
    */
   const setStartingAnimationIndex = (chosenPlayer) => {
-    // console.log(chosenPlayer);
-    for (let i = 0; i < modPlayers.length; i++) {
-      // console.log(chosenPlayer.name === modPlayers[i].name);
-      if (chosenPlayer.name === modPlayers[i].name) {
+    console.log(chosenPlayer);
+    for (let i = 0; i < players.length; i++) {
+      if (chosenPlayer === players[i]) {
         setCurrentAnimationIndex(
           (i -
-            (nameTickerIntervals.length % modPlayers.length) + // Animation's starting index
-            modPlayers.length) % // In case subtraction yields negative
-          modPlayers.length // In case sum exceeds length
+            (nameTickerIntervals.length % players.length) + // Animation's starting index
+            players.length) % // In case subtraction yields negative
+          players.length // In case sum exceeds length
         );
         break;
       }
@@ -153,10 +148,16 @@ function Dare() {
 
   const [acceptDare, setAcceptDare] = useState(false);
 
+  /**
+   * Update the score(s) of anyone except the "Everyone" entry
+   * If the current player is "Everyone", update the entire score board instead
+   * 
+   * @param completeDare whether the player accepts the dare 
+   */
   const changeScore = (completeDare) => {
     setPlayers(
       players.map((player) => {
-        if (currentPlayer.isEveryone || player === currentPlayer) {
+        if (!player.isEveryone && (currentPlayer.isEveryone || player === currentPlayer)) {
           if (completeDare) {
             player.score++;
           } else {
@@ -182,7 +183,7 @@ function Dare() {
   const handleNextDare = () => {
     const newPlayer = getRandomPlayer();
     setCurrentPlayer(newPlayer);  // setCurrentPlayer is not executed immediately...
-    setCurrentDare(getRandomDare(newPlayer)); // ...so we have to pass the newPlayer manually, as opposed to line 154
+    setCurrentDare(getRandomDare(newPlayer)); // ...so we have to pass newPlayer manually, as opposed to line 154
     setTickCount(0);
   };
 
@@ -195,7 +196,7 @@ function Dare() {
       {/* Current Player */}
       <div className={isAnimating() ? null : "animation-name-selected"}>
         <h1 className="text-3xl md:text-4xl drop-shadow-lg font-semibold">
-          {modPlayers[currentAnimationIndex].name}
+          {players[currentAnimationIndex].name}
         </h1>
       </div>
 

@@ -19,27 +19,29 @@ function Scores() {
         <table className="text-left w-full">
           <tbody className="">
             {sortedPlayers.map((player, index) => {
-              return (
-                <tr key={player.name}>
-                  <td className="py-2 flex items-center">
-                    <span className="text-xl sm:text-2xl xl:text-3xl font-semibold">
-                      {player.name}
-                    </span>
-                    {index === 0 && (
-                      <img
-                        className="star-pic ml-4 inline w-4 sm:w-6"
-                        src={star}
-                        alt="star"
-                      />
-                    )}
-                  </td>
-                  <td className="text-right py-2">
-                    <span className="text-xl sm:text-2xl xl:text-3xl">
-                      {player.score}
-                    </span>
-                  </td>
-                </tr>
-              );
+              if (!player.isEveryone) { // "Everyone" entry should not have a score
+                return (
+                  <tr key={player.name}>
+                    <td className="py-2 flex items-center">
+                      <span className="text-xl sm:text-2xl xl:text-3xl font-semibold">
+                        {player.name}
+                      </span>
+                      {index === 0 && (
+                        <img
+                          className="star-pic ml-4 inline w-4 sm:w-6"
+                          src={star}
+                          alt="star"
+                        />
+                      )}
+                    </td>
+                    <td className="text-right py-2">
+                      <span className="text-xl sm:text-2xl xl:text-3xl">
+                        {player.score}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              } else return null;
             })}
           </tbody>
         </table>
