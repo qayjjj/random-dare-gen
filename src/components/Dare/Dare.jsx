@@ -21,36 +21,9 @@ function Dare() {
   // -------------------------------------------------------------------------
 
   const nameTickerIntervals = [
-    34,
-    13,
-    8,
-    5,
-    3,
-    2, // The ticker speeding up...
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2, // Ticking...
-    2,
-    3,
-    5,
-    8,
-    13,
-    21,
-    34, // And slowing down.
+    34, 13, 8, 5, 3, 2,                                 // The ticker speeding up...
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,  // Ticking...
+    2, 3, 5, 8, 13, 21, 34                              // And slowing down.
   ];
   const itvMultiplier = 25; // Multiplied with intervals to get length in ms
   const [tickCount, setTickCount] = useState(0);
@@ -70,7 +43,7 @@ function Dare() {
       }, nameTickerIntervals[tickCount] * itvMultiplier);
 
       return () => clearInterval(interval);
-      
+
     } else return;
   });
 
