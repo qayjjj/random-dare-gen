@@ -45,7 +45,7 @@ function Pause({ acceptDare, changeScore, handleNextDare }) {
               onClick={() => handleDoneQuitButtonClick(false)}
             >
               <span className="quit-text text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-widest">
-                Quit
+                Give up
               </span>
             </div>
             <div

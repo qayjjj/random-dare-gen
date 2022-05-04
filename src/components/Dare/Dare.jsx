@@ -12,10 +12,10 @@ function Dare() {
   const { players, setPlayers, paused, setPaused } = DareState.useContainer();
   // Modified array with additional "everyone" entry. Used for animations
   const modPlayers = [...players];
-  if (players.length !== 1) modPlayers.push({ name: "Everyone", score: 0});
+  if (players.length !== 1) modPlayers.push({ name: "Everyone", isEveryone: true });
   // Duplicated modPlayers entries. Used in randomizer to prevent predictable player cycles
   const [dupPlayers, setDupPlayers] = useState([...modPlayers].concat(modPlayers));
-  
+
   const dares = require("./Dares.json");
   const [unusedDares, setUnusedDares] = useState([...dares]);
 
@@ -68,8 +68,8 @@ function Dare() {
   useEffect(() => {
     if (isAnimating()) {
       const interval = setInterval(() => {
-        setTickCount(tickCount + 1);
         setCurrentAnimationIndex((currentAnimationIndex + 1) % modPlayers.length);
+        setTickCount(tickCount + 1);
       }, nameTickerIntervals[tickCount] * itvMultiplier);
 
       return () => {
@@ -97,15 +97,29 @@ function Dare() {
     return player;
   };
 
-  const getRandomDare = () => {
-    const index = Math.floor(Math.random() * unusedDares.length);
-    const dare = unusedDares[index];
+  const getRandomDare = (newPlayer) => {
+    let availableDares = unusedDares;
+    let suitableDares;
 
-    const remainingDares = [...unusedDares];
-    remainingDares.splice(index, 1);
-    setUnusedDares(remainingDares);
+    while (true) {
+      suitableDares = (newPlayer.isEveryone)
+        ? availableDares.filter(dare => dare.supportMultiplayer)
+        : availableDares;
 
-    if (remainingDares.length === 0) setUnusedDares([...dares]);
+      if (suitableDares.length > 0) break;
+
+      availableDares = [...dares]; // Setting state won't take effect immediately; reset local var instead
+    }
+
+    const index = Math.floor(Math.random() * suitableDares.length);
+    const dare = suitableDares[index];
+
+    for (let i = 0; i < availableDares.length; i++) {
+      if (availableDares[i] === dare)
+        availableDares.splice(i, 1);
+    }
+
+    setUnusedDares(availableDares);
     return dare;
   };
 
@@ -115,14 +129,17 @@ function Dare() {
    * @param chosenPlayer the player the animation will end on
    */
   const setStartingAnimationIndex = (chosenPlayer) => {
+    // console.log(chosenPlayer);
     for (let i = 0; i < modPlayers.length; i++) {
+      // console.log(chosenPlayer.name === modPlayers[i].name);
       if (chosenPlayer.name === modPlayers[i].name) {
         setCurrentAnimationIndex(
           (i -
             (nameTickerIntervals.length % modPlayers.length) + // Animation's starting index
             modPlayers.length) % // In case subtraction yields negative
-            modPlayers.length // In case sum exceeds length
+          modPlayers.length // In case sum exceeds length
         );
+        break;
       }
     }
   };
@@ -132,14 +149,14 @@ function Dare() {
   // -------------------------------------------------------------------------
 
   const [currentPlayer, setCurrentPlayer] = useState(() => getRandomPlayer());
-  const [currentDare, setCurrentDare] = useState(() => getRandomDare());
+  const [currentDare, setCurrentDare] = useState(() => getRandomDare(currentPlayer));
 
   const [acceptDare, setAcceptDare] = useState(false);
 
   const changeScore = (completeDare) => {
     setPlayers(
       players.map((player) => {
-        if (currentPlayer.name === "Everyone" || player.name === currentPlayer.name) {
+        if (currentPlayer.isEveryone || player === currentPlayer) {
           if (completeDare) {
             player.score++;
           } else {
@@ -163,8 +180,9 @@ function Dare() {
   };
 
   const handleNextDare = () => {
-    setCurrentPlayer(getRandomPlayer());
-    setCurrentDare(getRandomDare());
+    const newPlayer = getRandomPlayer();
+    setCurrentPlayer(newPlayer);  // setCurrentPlayer is not executed immediately...
+    setCurrentDare(getRandomDare(newPlayer)); // ...so we have to pass the newPlayer manually, as opposed to line 154
     setTickCount(0);
   };
 

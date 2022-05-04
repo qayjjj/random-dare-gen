@@ -50,7 +50,7 @@ function Home() {
     let players = [];
     names.map((name) => {
       if (name !== "" && name.trim() !== "") {
-        players.push({ name: name.trim(), score: 0 });
+        players.push({ name: name.trim(), score: 0 , isEveryone: false });
       }
       return null;
     });
