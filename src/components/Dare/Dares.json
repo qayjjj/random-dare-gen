@@ -150,5 +150,57 @@
     {
         "text": "Go outside and pick exactly 40 blades of grass with a pair of tweezers",
         "supportMultiplayer": false
+    },
+    {
+        "text": "You have 10 seconds to pass through a door",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Throw a pen into a cup from 10 paces",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Name five world leaders in 15 seconds",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Find and touch a hat in the next 30 seconds",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Let someone else give you a tattoo with a marker",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Go outside and howl at the sky",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Read this dare in your best British accent",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Compose a haiku about the person to your left",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Dump a cup of water in your pants",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Convince someone to switch seats with you",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Let someone hide your phone in the room",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Do the worm",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Act like a tree",
+        "supportMultiplayer": true
     }
 ]
