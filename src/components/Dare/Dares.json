@@ -78,5 +78,77 @@
     {
         "text": "Give yourself a tattoo with a marker",
         "supportMultiplayer": false
+    },
+    {
+        "text": "Talk to a pillow like it's your crush",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Pretend you're a bird and eat cereal off the floor using only your mouth",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Cross your eyes when talking",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Stand up and do jumping jacks until your next turn",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Go outside and try to summon the rain",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Call a random number and sing 'Happy Birthday.'",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Trade clothes with the person next to you",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Stop a car that is going down the street and tell them that their wheels are turning",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Cry like a baby for one full minute",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Sing instead of speaking for the next two rounds of the game",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Call a pizza shop and ask if you can return a pizza",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Call your mom and tell her you can't find a girlfriend in a very panicked voice",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Stand in the backyard and yell at the top of your lungs, “Nooooo! I was adopted!",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Eat a spoonful of mustard",
+        "supportMultiplayer": true
+    },
+    {
+        "text": "Call a pizza place and ask if they use cruelty-free wheat in their dough",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Call a random number, and when someone picks up, immediately start singing the national anthem",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Take a selfie with the toilet and post it online",
+        "supportMultiplayer": false
+    },
+    {
+        "text": "Go outside and pick exactly 40 blades of grass with a pair of tweezers",
+        "supportMultiplayer": false
     }
 ]
