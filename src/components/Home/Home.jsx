@@ -53,8 +53,9 @@ function Home() {
       }
       return null;
     });
-    // An "Everyone" entry for interactions!  
-    players.push({ name: "Everyone", isEveryone: true });
+    // An "Everyone" entry for interactions!
+    if (players.length > 1)  
+      players.push({ name: "Everyone", isEveryone: true });
     setStartGame(true);
     setPlayers(players);
   };

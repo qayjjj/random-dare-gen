@@ -202,5 +202,21 @@
     {
         "text": "Act like a tree",
         "supportMultiplayer": true
+    },
+    {
+        "text": "Lie on top of the person to your right and make a stack",
+        "supportMultiplayer": true
+    },
+    {
+      "text": "Lap dance on the person opposite of you",
+      "supportMultiplayer": false
+    },
+    {
+      "text": "Drink something mixed by the person to your right",
+      "supportMultiplayer": false
+    },
+    {
+      "text": "Drink something mixed by the person to your left",
+      "supportMultiplayer": false
     }
 ]
