@@ -11,7 +11,7 @@ function Scores() {
   });
 
   return (
-    <div className="w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:px-6 -mt-40 sm:-mt-32 xl:-mt-26 h-4/5 sm:h-3/5 md:h-4/5">
+    <div className="w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:px-6 -mt-40 sm:-mt-32 xl:-mt-26 h-4/5 sm:h-3/5 md:h-3/4">
       <h1 className="text-center text-2xl sm:text-3xl xl:text-4xl font-semibold">
         Scores
       </h1>
