@@ -12,8 +12,7 @@
 
 /* Chrome, Safari and Opera */
 .scores-container::-webkit-scrollbar {
-  width: 0.5rem;
-  background: rgba(255,255,255,0.5);
+  width: 0.5rem; 
 }
 
 /* Track */
@@ -26,10 +25,4 @@
 .scores-container::-webkit-scrollbar-thumb {
   background: white; 
   border-radius: 1rem;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scores-container {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+} 

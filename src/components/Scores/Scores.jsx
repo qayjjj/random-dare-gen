@@ -11,15 +11,16 @@ function Scores() {
   });
 
   return (
-    <div className="w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:px-6 -mt-40 sm:-mt-32 xl:-mt-26 h-4/5 sm:h-3/5 md:h-3/4">
+    <div className="w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:px-6 -mt-40 sm:-mt-32 xl:-mt-26 h-4/5 sm:h-3/5 md:h-4/5">
       <h1 className="text-center text-2xl sm:text-3xl xl:text-4xl font-semibold">
         Scores
       </h1>
-      <div className="scores-container w-full overflow-y-scroll h-full mt-2 px-5">
+      <div className="scores-container w-full overflow-y-auto h-full mt-2 px-5">
         <table className="text-left w-full">
           <tbody className="">
             {sortedPlayers.map((player, index) => {
-              if (!player.isEveryone) { // "Everyone" entry should not have a score
+              if (!player.isEveryone) {
+                // "Everyone" entry should not have a score
                 return (
                   <tr key={player.name}>
                     <td className="py-2 flex items-center">
